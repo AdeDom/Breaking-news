@@ -7,4 +7,9 @@
     <string name="science">Science</string>
     <string name="sports">Sports</string>
     <string name="technology">Technology</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="author">Author</string>
+    <string name="published">Published</string>
+    <string name="detail">Detail</string>
 </resources>

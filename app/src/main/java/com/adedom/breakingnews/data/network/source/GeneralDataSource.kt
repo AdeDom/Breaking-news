@@ -8,7 +8,7 @@ interface GeneralDataSource {
 
     suspend fun saveGeneral(generalEntity: GeneralEntity)
 
-    fun getGeneralFlow(): Flow<GeneralEntity>
+    fun getGeneralFlow(): Flow<GeneralEntity?>
 
     suspend fun deleteGeneral()
 

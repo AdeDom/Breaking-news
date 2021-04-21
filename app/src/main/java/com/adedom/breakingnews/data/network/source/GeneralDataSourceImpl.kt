@@ -14,7 +14,7 @@ class GeneralDataSourceImpl(
         return db.getGeneralDao().saveGeneral(generalEntity)
     }
 
-    override fun getGeneralFlow(): Flow<GeneralEntity> {
+    override fun getGeneralFlow(): Flow<GeneralEntity?> {
         return db.getGeneralDao().getGeneralFlow()
     }
 

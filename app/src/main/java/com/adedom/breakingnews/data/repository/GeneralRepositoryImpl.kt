@@ -28,6 +28,7 @@ class GeneralRepositoryImpl(
             totalResults = response.totalResults,
             articles = response.articles.map {
                 ArticleDb(
+                    id = System.currentTimeMillis(),
                     author = it.author ?: it.source?.name,
                     title = it.title,
                     description = it.description,

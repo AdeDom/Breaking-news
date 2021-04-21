@@ -9,7 +9,11 @@
         android:id="@+id/generalFragment"
         android:name="com.adedom.breakingnews.presentation.general.GeneralFragment"
         android:label="@string/general"
-        tools:layout="@layout/fragment_general" />
+        tools:layout="@layout/fragment_general" >
+        <action
+            android:id="@+id/action_generalFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/businessFragment"
         android:name="com.adedom.breakingnews.presentation.business.BusinessFragment"
@@ -40,4 +44,13 @@
         android:name="com.adedom.breakingnews.presentation.technology.TechnologyFragment"
         android:label="@string/technology"
         tools:layout="@layout/fragment_technology" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.adedom.breakingnews.presentation.detail.DetailFragment"
+        android:label="@string/detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="detail"
+            app:argType="com.adedom.breakingnews.presentation.model.DetailModel" />
+    </fragment>
 </navigation>

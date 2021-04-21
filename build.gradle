@@ -4,9 +4,9 @@ buildscript {
     ext {
         kotlin_version = "1.4.32"
         room_version = "2.2.6"
-        coroutines_version = "1.4.2"
+        coroutines_version = "1.4.3"
         retrofit2_version = "2.9.0"
-        nav_version = "2.3.4"
+        nav_version = "2.3.5"
         lifecycle_version = "2.3.1"
         koin_version = "2.1.6"
         facebook_stetho_version = "1.5.1"

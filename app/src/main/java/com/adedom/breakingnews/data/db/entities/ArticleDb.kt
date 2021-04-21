@@ -1,6 +1,7 @@
 package com.adedom.breakingnews.data.db.entities
 
 data class ArticleDb(
+    val id: Long,
     val author: String? = null,
     val title: String? = null,
     val description: String? = null,
