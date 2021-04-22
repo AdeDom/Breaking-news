@@ -4,9 +4,15 @@ import com.adedom.breakingnews.data.model.response.BreakingNewsResponse
 
 interface GeneralRepository {
 
-    suspend fun callBreakingNews(
+    suspend fun callCategoryGeneral(
         category: String,
         country: String? = null
+    ): Resource<BreakingNewsResponse>
+
+    suspend fun callCategoryGeneralNextPage(
+        category: String,
+        country: String? = null,
+        page: Int,
     ): Resource<BreakingNewsResponse>
 
 }

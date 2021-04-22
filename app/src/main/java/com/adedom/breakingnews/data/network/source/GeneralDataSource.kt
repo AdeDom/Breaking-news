@@ -8,10 +8,16 @@ interface GeneralDataSource {
 
     suspend fun saveGeneral(generalEntity: GeneralEntity)
 
-    fun getGeneralFlow(): Flow<GeneralEntity?>
+    suspend fun getGeneralList(): List<GeneralEntity>
+
+    fun getGeneralFlow(): Flow<List<GeneralEntity>>
 
     suspend fun deleteGeneral()
 
-    suspend fun callBreakingNews(category: String, country: String? = null): BreakingNewsResponse
+    suspend fun callBreakingNews(
+        category: String,
+        country: String? = null,
+        page: Int? = null,
+    ): BreakingNewsResponse
 
 }

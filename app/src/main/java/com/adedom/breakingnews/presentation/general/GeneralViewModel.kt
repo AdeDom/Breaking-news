@@ -14,15 +14,30 @@ class GeneralViewModel(
 
     val getGeneral: LiveData<GeneralEntity> = getGeneralUseCase().asLiveData()
 
-    fun callGeneral() {
+    fun callCategoryGeneral() {
         launch {
             setState { copy(isLoading = true) }
 
-            when (val resource = getGeneralUseCase.callBreakingNews()) {
+            when (val resource = getGeneralUseCase.callCategoryGeneral()) {
                 is Resource.Error -> setError(resource.throwable)
             }
 
             setState { copy(isLoading = false) }
+        }
+    }
+
+    fun callCategoryGeneralNextPage(itemPosition: Int) {
+        val generalSizeNow = getGeneral.value?.articles?.size
+        if (generalSizeNow == itemPosition + 1 && generalSizeNow != 0) {
+            launch {
+                setState { copy(isLoading = true) }
+
+                when (val resource = getGeneralUseCase.callCategoryGeneralNextPage()) {
+                    is Resource.Error -> setError(resource.throwable)
+                }
+
+                setState { copy(isLoading = false) }
+            }
         }
     }
 

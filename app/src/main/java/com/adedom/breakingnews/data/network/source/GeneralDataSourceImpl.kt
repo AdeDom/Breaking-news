@@ -14,7 +14,11 @@ class GeneralDataSourceImpl(
         return db.getGeneralDao().saveGeneral(generalEntity)
     }
 
-    override fun getGeneralFlow(): Flow<GeneralEntity?> {
+    override suspend fun getGeneralList(): List<GeneralEntity> {
+        return db.getGeneralDao().getGeneralList()
+    }
+
+    override fun getGeneralFlow(): Flow<List<GeneralEntity>> {
         return db.getGeneralDao().getGeneralFlow()
     }
 
@@ -24,9 +28,10 @@ class GeneralDataSourceImpl(
 
     override suspend fun callBreakingNews(
         category: String,
-        country: String?
+        country: String?,
+        page: Int?,
     ): BreakingNewsResponse {
-        return dataSourceProvider.getBreakingNews().callBreakingNews(category, country)
+        return dataSourceProvider.getBreakingNews().callBreakingNews(category, country, page)
     }
 
 }

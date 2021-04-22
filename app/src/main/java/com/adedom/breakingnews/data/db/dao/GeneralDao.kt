@@ -14,10 +14,10 @@ interface GeneralDao {
     suspend fun saveGeneral(generalEntity: GeneralEntity)
 
     @Query("SELECT * FROM general")
-    suspend fun getGeneralList(): GeneralEntity
+    suspend fun getGeneralList(): List<GeneralEntity>
 
     @Query("SELECT * FROM general")
-    fun getGeneralFlow(): Flow<GeneralEntity?>
+    fun getGeneralFlow(): Flow<List<GeneralEntity>>
 
     @Query("DELETE FROM general")
     suspend fun deleteGeneral()

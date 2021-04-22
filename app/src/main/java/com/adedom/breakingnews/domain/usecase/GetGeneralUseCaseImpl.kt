@@ -6,6 +6,7 @@ import com.adedom.breakingnews.data.model.response.BreakingNewsResponse
 import com.adedom.breakingnews.data.network.source.GeneralDataSource
 import com.adedom.breakingnews.data.repository.GeneralRepository
 import com.adedom.breakingnews.data.repository.Resource
+import com.adedom.breakingnews.domain.CategoryConstant
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.text.SimpleDateFormat
@@ -20,38 +21,50 @@ class GetGeneralUseCaseImpl(
         return dataSource.getGeneralFlow().map { mapGeneralEntitySetDate(it) }
     }
 
-    private fun mapGeneralEntitySetDate(generalEntity: GeneralEntity?): GeneralEntity {
+    private fun mapGeneralEntitySetDate(generalEntityList: List<GeneralEntity>): GeneralEntity {
         val originFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
         val destinationFormat = SimpleDateFormat("d/M/yyyy", Locale.getDefault())
         return GeneralEntity(
-            totalResults = generalEntity?.totalResults,
-            articles = generalEntity?.articles?.map {
-                val publishedAt = try {
-                    it.publishedAt?.let { publishedAt ->
-                        val date = originFormat.parse(publishedAt)
-                        date?.let { destinationFormat.format(date) }
+            totalResults = if (generalEntityList.isEmpty()) 0 else generalEntityList[0].totalResults,
+            articles = generalEntityList.flatMap { it.articles }
+                .map {
+                    val publishedAt = try {
+                        it.publishedAt?.let { publishedAt ->
+                            val date = originFormat.parse(publishedAt)
+                            date?.let { destinationFormat.format(date) }
+                        }
+                    } catch (e: Throwable) {
+                        ""
                     }
-                } catch (e: Throwable) {
-                    ""
-                }
 
-                ArticleDb(
-                    id = it.id,
-                    author = it.author,
-                    title = it.title,
-                    description = it.description,
-                    urlToImage = it.urlToImage,
-                    publishedAt = publishedAt,
-                )
-            }?: emptyList()
+                    ArticleDb(
+                        id = it.id,
+                        author = it.author,
+                        title = it.title,
+                        description = it.description,
+                        urlToImage = it.urlToImage,
+                        publishedAt = publishedAt,
+                    )
+                }
         )
     }
 
-    override suspend fun callBreakingNews(
-        category: String,
+    override suspend fun callCategoryGeneral(
         country: String?
     ): Resource<BreakingNewsResponse> {
-        return repository.callBreakingNews(category, country)
+        return repository.callCategoryGeneral(CategoryConstant.GENERAL, country)
+    }
+
+    override suspend fun callCategoryGeneralNextPage(
+        country: String?,
+    ): Resource<BreakingNewsResponse> {
+        val generalList = dataSource.getGeneralList()
+        val page = (generalList.flatMap { it.articles }.size / 20) + 1
+        return repository.callCategoryGeneralNextPage(
+            CategoryConstant.GENERAL,
+            country,
+            page
+        )
     }
 
 }

@@ -10,6 +10,7 @@ interface BreakingNewsApi {
     suspend fun callBreakingNews(
         @Query("category") category: String,
         @Query("country") country: String? = null,
+        @Query("page") page: Int? = null,
     ): BreakingNewsResponse
 
 }

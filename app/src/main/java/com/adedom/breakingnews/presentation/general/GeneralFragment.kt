@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.adedom.breakingnews.R
 import com.adedom.breakingnews.base.BaseFragment
 import com.adedom.breakingnews.presentation.model.DetailModel
@@ -19,7 +20,7 @@ class GeneralFragment : BaseFragment(R.layout.fragment_general) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel.callGeneral()
+        viewModel.callCategoryGeneral()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,12 +33,21 @@ class GeneralFragment : BaseFragment(R.layout.fragment_general) {
 
     private fun setUpView() {
         recyclerView.apply {
-            layoutManager = LinearLayoutManager(context)
+            val llm = LinearLayoutManager(context)
+            layoutManager = llm
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+
+                    val itemPosition = llm.findLastCompletelyVisibleItemPosition()
+                    viewModel.callCategoryGeneralNextPage(itemPosition)
+                }
+            })
             adapter = mAdapter
         }
 
         swipeRefreshLayout.setOnRefreshListener {
-            viewModel.callGeneral()
+            viewModel.callCategoryGeneral()
             swipeRefreshLayout.isRefreshing = false
         }
     }
