@@ -17,6 +17,7 @@ interface GeneralDataSource {
     suspend fun callBreakingNews(
         category: String,
         country: String? = null,
+        query: String? = null,
         page: Int? = null,
     ): BreakingNewsResponse
 

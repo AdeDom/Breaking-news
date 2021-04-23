@@ -6,7 +6,6 @@ import com.adedom.breakingnews.data.model.response.BreakingNewsResponse
 import com.adedom.breakingnews.data.network.source.GeneralDataSource
 import com.adedom.breakingnews.data.repository.GeneralRepository
 import com.adedom.breakingnews.data.repository.Resource
-import com.adedom.breakingnews.domain.CategoryConstant
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.text.SimpleDateFormat
@@ -52,7 +51,7 @@ class GetGeneralUseCaseImpl(
     override suspend fun callCategoryGeneral(
         country: String?
     ): Resource<BreakingNewsResponse> {
-        return repository.callCategoryGeneral(CategoryConstant.GENERAL, country)
+        return repository.callCategoryGeneral(country)
     }
 
     override suspend fun callCategoryGeneralNextPage(
@@ -60,11 +59,14 @@ class GetGeneralUseCaseImpl(
     ): Resource<BreakingNewsResponse> {
         val generalList = dataSource.getGeneralList()
         val page = (generalList.flatMap { it.articles }.size / 20) + 1
-        return repository.callCategoryGeneralNextPage(
-            CategoryConstant.GENERAL,
-            country,
-            page
-        )
+        return repository.callCategoryGeneralNextPage(country, page)
+    }
+
+    override suspend fun callCategoryGeneralSearch(
+        country: String?,
+        query: String
+    ): Resource<BreakingNewsResponse> {
+        return repository.callCategoryGeneralSearch(country, query)
     }
 
 }

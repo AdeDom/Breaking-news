@@ -1,4 +1,4 @@
-package com.adedom.breakingnews.domain
+package com.adedom.breakingnews.data.repository
 
 object CategoryConstant {
     const val BUSINESS = "business"

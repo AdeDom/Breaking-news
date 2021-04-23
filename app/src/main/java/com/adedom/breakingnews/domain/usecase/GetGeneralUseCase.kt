@@ -17,4 +17,9 @@ interface GetGeneralUseCase {
         country: String? = null
     ): Resource<BreakingNewsResponse>
 
+    suspend fun callCategoryGeneralSearch(
+        country: String? = null,
+        query: String,
+    ): Resource<BreakingNewsResponse>
+
 }

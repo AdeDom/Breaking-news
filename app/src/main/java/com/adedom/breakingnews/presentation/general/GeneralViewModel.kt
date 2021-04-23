@@ -28,7 +28,7 @@ class GeneralViewModel(
 
     fun callCategoryGeneralNextPage(itemPosition: Int) {
         val generalSizeNow = getGeneral.value?.articles?.size
-        if (generalSizeNow == itemPosition + 1 && generalSizeNow != 0) {
+        if (generalSizeNow == itemPosition + 1 && generalSizeNow != 0 && generalSizeNow < 100) {
             launch {
                 setState { copy(isLoading = true) }
 
@@ -38,6 +38,23 @@ class GeneralViewModel(
 
                 setState { copy(isLoading = false) }
             }
+        }
+    }
+
+    fun setStateSearch(search: String) {
+        setState { copy(search = search) }
+    }
+
+    fun callCategoryGeneralSearch() {
+        launch {
+            setState { copy(isLoading = true) }
+
+            val search = state.value?.search ?: return@launch
+            when (val resource = getGeneralUseCase.callCategoryGeneralSearch(query = search)) {
+                is Resource.Error -> setError(resource.throwable)
+            }
+
+            setState { copy(isLoading = false) }
         }
     }
 

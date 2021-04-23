@@ -4,15 +4,16 @@ import com.adedom.breakingnews.data.model.response.BreakingNewsResponse
 
 interface GeneralRepository {
 
-    suspend fun callCategoryGeneral(
-        category: String,
-        country: String? = null
-    ): Resource<BreakingNewsResponse>
+    suspend fun callCategoryGeneral(country: String? = null): Resource<BreakingNewsResponse>
 
     suspend fun callCategoryGeneralNextPage(
-        category: String,
         country: String? = null,
         page: Int,
+    ): Resource<BreakingNewsResponse>
+
+    suspend fun callCategoryGeneralSearch(
+        country: String? = null,
+        query: String,
     ): Resource<BreakingNewsResponse>
 
 }

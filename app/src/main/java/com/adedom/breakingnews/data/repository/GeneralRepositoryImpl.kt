@@ -11,10 +11,11 @@ class GeneralRepositoryImpl(
 ) : BaseRepository(), GeneralRepository {
 
     override suspend fun callCategoryGeneral(
-        category: String,
         country: String?
     ): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall { dataSource.callBreakingNews(category, country) }
+        val resource = safeApiCall {
+            dataSource.callBreakingNews(CategoryConstant.GENERAL, country)
+        }
         if (resource is Resource.Success) {
             dataSource.deleteGeneral()
             val generalEntity = mapBreakingNewsResponseToGeneralEntity(resource.data)
@@ -24,12 +25,28 @@ class GeneralRepositoryImpl(
     }
 
     override suspend fun callCategoryGeneralNextPage(
-        category: String,
         country: String?,
         page: Int,
     ): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall { dataSource.callBreakingNews(category, country, page) }
+        val resource = safeApiCall {
+            dataSource.callBreakingNews(CategoryConstant.GENERAL, country, page = page)
+        }
         if (resource is Resource.Success) {
+            val generalEntity = mapBreakingNewsResponseToGeneralEntity(resource.data)
+            dataSource.saveGeneral(generalEntity)
+        }
+        return resource
+    }
+
+    override suspend fun callCategoryGeneralSearch(
+        country: String?,
+        query: String
+    ): Resource<BreakingNewsResponse> {
+        val resource = safeApiCall {
+            dataSource.callBreakingNews(CategoryConstant.GENERAL, country, query = query)
+        }
+        if (resource is Resource.Success) {
+            dataSource.deleteGeneral()
             val generalEntity = mapBreakingNewsResponseToGeneralEntity(resource.data)
             dataSource.saveGeneral(generalEntity)
         }

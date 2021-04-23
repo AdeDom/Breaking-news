@@ -2,13 +2,16 @@ package com.adedom.breakingnews.presentation.general
 
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adedom.breakingnews.R
 import com.adedom.breakingnews.base.BaseFragment
 import com.adedom.breakingnews.presentation.model.DetailModel
+import com.adedom.breakingnews.utils.hideSoftKeyboard
 import kotlinx.android.synthetic.main.fragment_general.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -69,6 +72,8 @@ class GeneralFragment : BaseFragment(R.layout.fragment_general) {
 
     private fun viewEvent() {
         mAdapter.setOnClickListener {
+            activity?.hideSoftKeyboard()
+
             val model = DetailModel(
                 id = it.id,
                 author = it.author,
@@ -80,6 +85,19 @@ class GeneralFragment : BaseFragment(R.layout.fragment_general) {
             val navDirections = GeneralFragmentDirections
                 .actionGeneralFragmentToDetailFragment(model)
             findNavController().navigate(navDirections)
+        }
+
+        etSearch.addTextChangedListener { viewModel.setStateSearch(it.toString()) }
+
+        ibSearch.setOnClickListener { viewModel.callCategoryGeneralSearch() }
+
+        etSearch.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                activity?.hideSoftKeyboard()
+                viewModel.callCategoryGeneralSearch()
+                return@setOnEditorActionListener true
+            }
+            false
         }
     }
 

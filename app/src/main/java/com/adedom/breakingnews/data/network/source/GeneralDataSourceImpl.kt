@@ -29,9 +29,10 @@ class GeneralDataSourceImpl(
     override suspend fun callBreakingNews(
         category: String,
         country: String?,
+        query: String?,
         page: Int?,
     ): BreakingNewsResponse {
-        return dataSourceProvider.getBreakingNews().callBreakingNews(category, country, page)
+        return dataSourceProvider.getBreakingNews().callBreakingNews(category, country, query, page)
     }
 
 }
