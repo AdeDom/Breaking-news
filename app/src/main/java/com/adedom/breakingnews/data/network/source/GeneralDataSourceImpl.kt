@@ -6,24 +6,24 @@ import com.adedom.breakingnews.data.model.response.BreakingNewsResponse
 import kotlinx.coroutines.flow.Flow
 
 class GeneralDataSourceImpl(
-    private val db: AppDatabase,
+    private val appDatabase: AppDatabase,
     private val dataSourceProvider: DataSourceProvider,
 ) : GeneralDataSource {
 
     override suspend fun saveGeneral(generalEntity: GeneralEntity) {
-        return db.getGeneralDao().saveGeneral(generalEntity)
+        return appDatabase.getGeneralDao().saveGeneral(generalEntity)
     }
 
     override suspend fun getGeneralList(): List<GeneralEntity> {
-        return db.getGeneralDao().getGeneralList()
+        return appDatabase.getGeneralDao().getGeneralList()
     }
 
     override fun getGeneralFlow(): Flow<List<GeneralEntity>> {
-        return db.getGeneralDao().getGeneralFlow()
+        return appDatabase.getGeneralDao().getGeneralFlow()
     }
 
     override suspend fun deleteGeneral() {
-        return db.getGeneralDao().deleteGeneral()
+        return appDatabase.getGeneralDao().deleteGeneral()
     }
 
     override suspend fun callBreakingNews(

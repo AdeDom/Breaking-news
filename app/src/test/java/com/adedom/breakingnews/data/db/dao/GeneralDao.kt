@@ -32,7 +32,7 @@ class TicTacToeDaoTest {
     }
 
     @After
-    fun cleanup() {
+    fun cleanUp() {
         db.close()
         KoinContextHandler.stop()
     }
