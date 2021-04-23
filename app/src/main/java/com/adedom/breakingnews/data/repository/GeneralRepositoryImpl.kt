@@ -8,8 +8,8 @@ import com.adedom.breakingnews.data.network.source.GeneralDataSource
 import com.adedom.breakingnews.data.sharedpreference.SettingPref
 
 class GeneralRepositoryImpl(
-    private val settingPref: SettingPref,
     private val dataSource: GeneralDataSource,
+    private val settingPref: SettingPref,
 ) : BaseRepository(), GeneralRepository {
 
     override suspend fun callCategoryGeneral(): Resource<BreakingNewsResponse> {
@@ -47,7 +47,7 @@ class GeneralRepositoryImpl(
         return resource
     }
 
-    fun getCountry(): String? = if (settingPref.isSearchOnlyThaiNews) "th" else null
+    private fun getCountry(): String? = if (settingPref.isSearchOnlyThaiNews) "th" else null
 
     private fun mapBreakingNewsResponseToGeneralEntity(response: BreakingNewsResponse): GeneralEntity {
         return GeneralEntity(
