@@ -12,10 +12,10 @@ import com.adedom.breakingnews.R
 import com.adedom.breakingnews.base.BaseFragment
 import com.adedom.breakingnews.presentation.model.DetailModel
 import com.adedom.breakingnews.utils.hideSoftKeyboard
-import kotlinx.android.synthetic.main.fragment_general.*
+import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class GeneralFragment : BaseFragment(R.layout.fragment_general) {
+class GeneralFragment : BaseFragment(R.layout.fragment_main) {
 
     private val viewModel by viewModel<GeneralViewModel>()
     private val mAdapter by lazy { GeneralAdapter() }

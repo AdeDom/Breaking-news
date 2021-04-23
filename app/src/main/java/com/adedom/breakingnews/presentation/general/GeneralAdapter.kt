@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adedom.breakingnews.R
 import com.adedom.breakingnews.data.db.entities.ArticleDb
 import com.adedom.breakingnews.utils.load
-import kotlinx.android.synthetic.main.item_general.view.*
+import kotlinx.android.synthetic.main.item_detail.view.*
 
 class GeneralAdapter : RecyclerView.Adapter<GeneralAdapter.GeneralViewHolder>() {
 
@@ -31,7 +31,7 @@ class GeneralAdapter : RecyclerView.Adapter<GeneralAdapter.GeneralViewHolder>() 
         get() = asyncListDiffer.currentList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GeneralViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_general, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_detail, parent, false)
         return GeneralViewHolder(view)
     }
 
