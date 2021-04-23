@@ -13,4 +13,6 @@
     <string name="published">Published</string>
     <string name="detail">Detail</string>
     <string name="search">Search</string>
+    <string name="setting">Setting</string>
+    <string name="search_only_thai_news">Search only Thai news</string>
 </resources>

@@ -36,4 +36,9 @@
         android:icon="@drawable/ic_technology"
         android:title="@string/technology" />
 
+    <item
+        android:id="@+id/settingFragment"
+        android:icon="@drawable/ic_settings_black"
+        android:title="@string/setting" />
+
 </menu>

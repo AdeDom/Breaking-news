@@ -77,4 +77,9 @@
             android:name="detail"
             app:argType="com.adedom.breakingnews.presentation.model.DetailModel" />
     </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.adedom.breakingnews.presentation.setting.SettingFragment"
+        android:label="@string/setting"
+        tools:layout="@layout/fragment_setting" />
 </navigation>
