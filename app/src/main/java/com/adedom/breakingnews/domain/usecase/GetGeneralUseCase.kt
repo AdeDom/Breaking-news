@@ -9,6 +9,8 @@ interface GetGeneralUseCase {
 
     operator fun invoke(): Flow<GeneralEntity>
 
+    fun mapGeneralEntitySetDate(generalEntityList: List<GeneralEntity>): GeneralEntity
+
     suspend fun callCategoryGeneral(): Resource<BreakingNewsResponse>
 
     suspend fun callCategoryGeneralNextPage(): Resource<BreakingNewsResponse>

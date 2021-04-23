@@ -20,7 +20,7 @@ class GetGeneralUseCaseImpl(
         return dataSource.getGeneralFlow().map { mapGeneralEntitySetDate(it) }
     }
 
-    private fun mapGeneralEntitySetDate(generalEntityList: List<GeneralEntity>): GeneralEntity {
+    override fun mapGeneralEntitySetDate(generalEntityList: List<GeneralEntity>): GeneralEntity {
         val originFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
         val destinationFormat = SimpleDateFormat("d/M/yyyy", Locale.getDefault())
         return GeneralEntity(
