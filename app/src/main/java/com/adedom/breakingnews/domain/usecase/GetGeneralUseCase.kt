@@ -9,17 +9,10 @@ interface GetGeneralUseCase {
 
     operator fun invoke(): Flow<GeneralEntity>
 
-    suspend fun callCategoryGeneral(
-        country: String? = null
-    ): Resource<BreakingNewsResponse>
+    suspend fun callCategoryGeneral(): Resource<BreakingNewsResponse>
 
-    suspend fun callCategoryGeneralNextPage(
-        country: String? = null
-    ): Resource<BreakingNewsResponse>
+    suspend fun callCategoryGeneralNextPage(): Resource<BreakingNewsResponse>
 
-    suspend fun callCategoryGeneralSearch(
-        country: String? = null,
-        query: String,
-    ): Resource<BreakingNewsResponse>
+    suspend fun callCategoryGeneralSearch(query: String): Resource<BreakingNewsResponse>
 
 }

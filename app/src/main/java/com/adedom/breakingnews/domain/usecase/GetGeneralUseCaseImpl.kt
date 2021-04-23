@@ -48,25 +48,18 @@ class GetGeneralUseCaseImpl(
         )
     }
 
-    override suspend fun callCategoryGeneral(
-        country: String?
-    ): Resource<BreakingNewsResponse> {
-        return repository.callCategoryGeneral(country)
+    override suspend fun callCategoryGeneral(): Resource<BreakingNewsResponse> {
+        return repository.callCategoryGeneral()
     }
 
-    override suspend fun callCategoryGeneralNextPage(
-        country: String?,
-    ): Resource<BreakingNewsResponse> {
+    override suspend fun callCategoryGeneralNextPage(): Resource<BreakingNewsResponse> {
         val generalList = dataSource.getGeneralList()
         val page = (generalList.flatMap { it.articles }.size / 20) + 1
-        return repository.callCategoryGeneralNextPage(country, page)
+        return repository.callCategoryGeneralNextPage(page)
     }
 
-    override suspend fun callCategoryGeneralSearch(
-        country: String?,
-        query: String
-    ): Resource<BreakingNewsResponse> {
-        return repository.callCategoryGeneralSearch(country, query)
+    override suspend fun callCategoryGeneralSearch(query: String): Resource<BreakingNewsResponse> {
+        return repository.callCategoryGeneralSearch(query)
     }
 
 }

@@ -15,7 +15,7 @@ val dataModule = module {
     single { AppDatabase(get()) }
     single { DataSourceProvider() }
     single<GeneralDataSource> { GeneralDataSourceImpl(get(), get()) }
-    single<GeneralRepository> { GeneralRepositoryImpl(get()) }
+    single<GeneralRepository> { GeneralRepositoryImpl(get(), get()) }
 
     single<SettingPref> { SettingPrefImpl(get()) }
 

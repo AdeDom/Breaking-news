@@ -5,16 +5,16 @@ import com.adedom.breakingnews.data.db.entities.ArticleDb
 import com.adedom.breakingnews.data.db.entities.GeneralEntity
 import com.adedom.breakingnews.data.model.response.BreakingNewsResponse
 import com.adedom.breakingnews.data.network.source.GeneralDataSource
+import com.adedom.breakingnews.data.sharedpreference.SettingPref
 
 class GeneralRepositoryImpl(
+    private val settingPref: SettingPref,
     private val dataSource: GeneralDataSource,
 ) : BaseRepository(), GeneralRepository {
 
-    override suspend fun callCategoryGeneral(
-        country: String?
-    ): Resource<BreakingNewsResponse> {
+    override suspend fun callCategoryGeneral(): Resource<BreakingNewsResponse> {
         val resource = safeApiCall {
-            dataSource.callBreakingNews(CategoryConstant.GENERAL, country)
+            dataSource.callBreakingNews(CategoryConstant.GENERAL, getCountry())
         }
         if (resource is Resource.Success) {
             dataSource.deleteGeneral()
@@ -24,12 +24,9 @@ class GeneralRepositoryImpl(
         return resource
     }
 
-    override suspend fun callCategoryGeneralNextPage(
-        country: String?,
-        page: Int,
-    ): Resource<BreakingNewsResponse> {
+    override suspend fun callCategoryGeneralNextPage(page: Int): Resource<BreakingNewsResponse> {
         val resource = safeApiCall {
-            dataSource.callBreakingNews(CategoryConstant.GENERAL, country, page = page)
+            dataSource.callBreakingNews(CategoryConstant.GENERAL, getCountry(), page = page)
         }
         if (resource is Resource.Success) {
             val generalEntity = mapBreakingNewsResponseToGeneralEntity(resource.data)
@@ -38,12 +35,9 @@ class GeneralRepositoryImpl(
         return resource
     }
 
-    override suspend fun callCategoryGeneralSearch(
-        country: String?,
-        query: String
-    ): Resource<BreakingNewsResponse> {
+    override suspend fun callCategoryGeneralSearch(query: String): Resource<BreakingNewsResponse> {
         val resource = safeApiCall {
-            dataSource.callBreakingNews(CategoryConstant.GENERAL, country, query = query)
+            dataSource.callBreakingNews(CategoryConstant.GENERAL, getCountry(), query = query)
         }
         if (resource is Resource.Success) {
             dataSource.deleteGeneral()
@@ -52,6 +46,8 @@ class GeneralRepositoryImpl(
         }
         return resource
     }
+
+    fun getCountry(): String? = if (settingPref.isSearchOnlyThaiNews) "th" else null
 
     private fun mapBreakingNewsResponseToGeneralEntity(response: BreakingNewsResponse): GeneralEntity {
         return GeneralEntity(
