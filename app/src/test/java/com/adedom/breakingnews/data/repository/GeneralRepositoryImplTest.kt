@@ -3,6 +3,7 @@ package com.adedom.breakingnews.data.repository
 import com.adedom.breakingnews.data.model.response.ArticleData
 import com.adedom.breakingnews.data.model.response.BreakingNewsResponse
 import com.adedom.breakingnews.data.model.response.SourceData
+import com.adedom.breakingnews.data.network.source.BreakingNewsDataSource
 import com.adedom.breakingnews.data.network.source.GeneralDataSource
 import com.adedom.breakingnews.data.sharedpreference.SettingPref
 import com.google.common.truth.Truth.assertThat
@@ -16,13 +17,14 @@ import org.koin.core.context.KoinContextHandler
 
 class GeneralRepositoryImplTest {
 
-    private val dataSource: GeneralDataSource = mockk(relaxed = true)
+    private val generalDataSource: GeneralDataSource = mockk(relaxed = true)
+    private val breakingNewsDataSource: BreakingNewsDataSource = mockk(relaxed = true)
     private val settingPref: SettingPref = mockk(relaxed = true)
     private lateinit var repository: GeneralRepository
 
     @Before
     fun setUp() {
-        repository = GeneralRepositoryImpl(dataSource, settingPref)
+        repository = GeneralRepositoryImpl(generalDataSource, breakingNewsDataSource, settingPref)
     }
 
     @After
@@ -33,7 +35,7 @@ class GeneralRepositoryImplTest {
     @Test
     fun callCategoryGeneral_success() = runBlocking {
         val response = responseSuccess()
-        coEvery { dataSource.callBreakingNews(any(), any()) } returns response
+        coEvery { breakingNewsDataSource.callBreakingNews(any(), any()) } returns response
 
         val resource = repository.callCategoryGeneral()
 
@@ -43,7 +45,7 @@ class GeneralRepositoryImplTest {
     @Test
     fun callCategoryGeneral_error() = runBlocking {
         val throwable = Throwable("Api error")
-        coEvery { dataSource.callBreakingNews(any(), any()) } throws throwable
+        coEvery { breakingNewsDataSource.callBreakingNews(any(), any()) } throws throwable
 
         val resource = repository.callCategoryGeneral()
 
@@ -53,7 +55,7 @@ class GeneralRepositoryImplTest {
     @Test
     fun callCategoryGeneralNextPage_success() = runBlocking {
         val response = responseSuccess()
-        coEvery { dataSource.callBreakingNews(any(), any(), page = any()) } returns response
+        coEvery { breakingNewsDataSource.callBreakingNews(any(), any(), page = any()) } returns response
 
         val resource = repository.callCategoryGeneralNextPage(1)
 
@@ -63,7 +65,7 @@ class GeneralRepositoryImplTest {
     @Test
     fun callCategoryGeneralNextPage_error() = runBlocking {
         val throwable = Throwable("Api error")
-        coEvery { dataSource.callBreakingNews(any(), any(), page = any()) } throws throwable
+        coEvery { breakingNewsDataSource.callBreakingNews(any(), any(), page = any()) } throws throwable
 
         val resource = repository.callCategoryGeneralNextPage(1)
 
@@ -73,7 +75,7 @@ class GeneralRepositoryImplTest {
     @Test
     fun callCategoryGeneralSearch_success() = runBlocking {
         val response = responseSuccess()
-        coEvery { dataSource.callBreakingNews(any(), any(), query = any()) } returns response
+        coEvery { breakingNewsDataSource.callBreakingNews(any(), any(), query = any()) } returns response
 
         val resource = repository.callCategoryGeneralSearch("Covid")
 
@@ -83,7 +85,7 @@ class GeneralRepositoryImplTest {
     @Test
     fun callCategoryGeneralSearch_error() = runBlocking {
         val throwable = Throwable("Api error")
-        coEvery { dataSource.callBreakingNews(any(), any(), query = any()) } throws throwable
+        coEvery { breakingNewsDataSource.callBreakingNews(any(), any(), query = any()) } throws throwable
 
         val resource = repository.callCategoryGeneralSearch("Covid")
 
