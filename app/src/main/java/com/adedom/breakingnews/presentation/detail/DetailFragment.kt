@@ -1,6 +1,10 @@
 package com.adedom.breakingnews.presentation.detail
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import android.view.View
 import androidx.navigation.fragment.navArgs
 import com.adedom.breakingnews.R
@@ -16,14 +20,27 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail) {
         super.onViewCreated(view, savedInstanceState)
 
         setUpView()
+        viewEvent()
     }
 
     private fun setUpView() {
         tvTitle.text = args.detail.title
         tvDescription.text = args.detail.description
+        tvUrl.text = SpannableString(args.detail.url).apply {
+            setSpan(UnderlineSpan(), 0, this.length, 0)
+        }
         tvAuthor.text = args.detail.author
         tvPublishedAt.text = args.detail.publishedAt
         ivImage.load(args.detail.urlToImage)
+    }
+
+    private fun viewEvent() {
+        tvUrl.setOnClickListener {
+            Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse(args.detail.url)
+                startActivity(this)
+            }
+        }
     }
 
 }

@@ -8,11 +8,13 @@ data class DetailModel(
     val author: String? = null,
     val title: String? = null,
     val description: String? = null,
+    val url: String? = null,
     val urlToImage: String? = null,
     val publishedAt: String? = null,
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readLong(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -25,6 +27,7 @@ data class DetailModel(
         parcel.writeString(author)
         parcel.writeString(title)
         parcel.writeString(description)
+        parcel.writeString(url)
         parcel.writeString(urlToImage)
         parcel.writeString(publishedAt)
     }

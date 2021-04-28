@@ -58,6 +58,7 @@ class GeneralRepositoryImpl(
                     author = it.author ?: it.source?.name,
                     title = it.title,
                     description = it.description,
+                    url = it.url,
                     urlToImage = it.urlToImage,
                     publishedAt = it.publishedAt,
                 )

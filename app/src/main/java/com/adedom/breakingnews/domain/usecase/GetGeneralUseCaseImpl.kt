@@ -41,6 +41,7 @@ class GetGeneralUseCaseImpl(
                         author = it.author,
                         title = it.title,
                         description = it.description,
+                        url = it.url,
                         urlToImage = it.urlToImage,
                         publishedAt = publishedAt,
                     )

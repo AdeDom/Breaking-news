@@ -79,6 +79,7 @@ class GeneralFragment : BaseFragment(R.layout.fragment_main) {
                 author = it.author,
                 title = it.title,
                 description = it.description,
+                url = it.url,
                 urlToImage = it.urlToImage,
                 publishedAt = it.publishedAt,
             )
