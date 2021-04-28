@@ -4,7 +4,7 @@ import androidx.room.TypeConverter
 import com.adedom.breakingnews.data.db.entities.ArticleDb
 import com.google.gson.Gson
 
-class GeneralConverter {
+class ArticleConverter {
 
     @TypeConverter
     fun listToJson(value: List<ArticleDb>): String {

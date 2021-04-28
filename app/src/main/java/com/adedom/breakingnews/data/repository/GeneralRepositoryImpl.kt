@@ -4,45 +4,47 @@ import com.adedom.breakingnews.base.BaseRepository
 import com.adedom.breakingnews.data.db.entities.ArticleDb
 import com.adedom.breakingnews.data.db.entities.GeneralEntity
 import com.adedom.breakingnews.data.model.response.BreakingNewsResponse
+import com.adedom.breakingnews.data.network.source.BreakingNewsDataSource
 import com.adedom.breakingnews.data.network.source.GeneralDataSource
 import com.adedom.breakingnews.data.sharedpreference.SettingPref
 
 class GeneralRepositoryImpl(
-    private val dataSource: GeneralDataSource,
+    private val generalDataSource: GeneralDataSource,
+    private val breakingNewsDataSource: BreakingNewsDataSource,
     private val settingPref: SettingPref,
 ) : BaseRepository(), GeneralRepository {
 
     override suspend fun callCategoryGeneral(): Resource<BreakingNewsResponse> {
         val resource = safeApiCall {
-            dataSource.callBreakingNews(CategoryConstant.GENERAL, getCountry())
+            breakingNewsDataSource.callBreakingNews(CategoryConstant.GENERAL, getCountry())
         }
         if (resource is Resource.Success) {
-            dataSource.deleteGeneral()
+            generalDataSource.deleteGeneral()
             val generalEntity = mapBreakingNewsResponseToGeneralEntity(resource.data)
-            dataSource.saveGeneral(generalEntity)
+            generalDataSource.saveGeneral(generalEntity)
         }
         return resource
     }
 
     override suspend fun callCategoryGeneralNextPage(page: Int): Resource<BreakingNewsResponse> {
         val resource = safeApiCall {
-            dataSource.callBreakingNews(CategoryConstant.GENERAL, getCountry(), page = page)
+            breakingNewsDataSource.callBreakingNews(CategoryConstant.GENERAL, getCountry(), page = page)
         }
         if (resource is Resource.Success) {
             val generalEntity = mapBreakingNewsResponseToGeneralEntity(resource.data)
-            dataSource.saveGeneral(generalEntity)
+            generalDataSource.saveGeneral(generalEntity)
         }
         return resource
     }
 
     override suspend fun callCategoryGeneralSearch(query: String): Resource<BreakingNewsResponse> {
         val resource = safeApiCall {
-            dataSource.callBreakingNews(CategoryConstant.GENERAL, getCountry(), query = query)
+            breakingNewsDataSource.callBreakingNews(CategoryConstant.GENERAL, getCountry(), query = query)
         }
         if (resource is Resource.Success) {
-            dataSource.deleteGeneral()
+            generalDataSource.deleteGeneral()
             val generalEntity = mapBreakingNewsResponseToGeneralEntity(resource.data)
-            dataSource.saveGeneral(generalEntity)
+            generalDataSource.saveGeneral(generalEntity)
         }
         return resource
     }
