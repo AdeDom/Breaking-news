@@ -26,9 +26,11 @@ class GeneralViewModel(
         }
     }
 
-    fun callCategoryGeneralNextPage(itemPosition: Int) {
-        val generalSizeNow = getGeneral.value?.articles?.size
-        if (generalSizeNow == itemPosition + 1 && generalSizeNow != 0 && generalSizeNow < 100) {
+    fun callCategoryGeneralNextPage(
+        itemPosition: Int,
+        generalSizeNow: Int? = getGeneral.value?.articles?.size
+    ) {
+        if (generalSizeNow == itemPosition + 1 && generalSizeNow in (1..99)) {
             launch {
                 setState { copy(isLoading = true) }
 
