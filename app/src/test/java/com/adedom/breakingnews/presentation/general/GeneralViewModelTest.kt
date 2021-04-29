@@ -55,7 +55,7 @@ class GeneralViewModelTest {
         val resource = Resource.Error(throwable)
         coEvery { getGeneralUseCase.callCategoryGeneralNextPage() } returns resource
 
-        viewModel.callCategoryGeneralNextPage(9, 10)
+        viewModel.callCategoryGeneralNextPage(24, 25)
 
         val error = viewModel.error.getOrAwaitValue()
         assertThat(error).isEqualTo(throwable)

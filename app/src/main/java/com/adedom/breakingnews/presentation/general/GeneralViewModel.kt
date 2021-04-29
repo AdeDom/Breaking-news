@@ -30,7 +30,7 @@ class GeneralViewModel(
         itemPosition: Int,
         generalSizeNow: Int? = getGeneral.value?.articles?.size
     ) {
-        if (generalSizeNow == itemPosition + 1 && generalSizeNow in (1..99)) {
+        if (generalSizeNow == itemPosition + 1 && generalSizeNow in (20..99)) {
             launch {
                 setState { copy(isLoading = true) }
 

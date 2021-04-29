@@ -28,9 +28,9 @@ class ScienceViewModel(
 
     fun callCategoryScienceNextPage(
         itemPosition: Int,
-        ScienceSizeNow: Int? = getScience.value?.articles?.size
+        scienceSizeNow: Int? = getScience.value?.articles?.size
     ) {
-        if (ScienceSizeNow == itemPosition + 1 && ScienceSizeNow in (1..99)) {
+        if (scienceSizeNow == itemPosition + 1 && scienceSizeNow in (20..99)) {
             launch {
                 setState { copy(isLoading = true) }
 
