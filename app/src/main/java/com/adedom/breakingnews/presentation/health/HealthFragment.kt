@@ -91,7 +91,10 @@ class HealthFragment : BaseFragment(R.layout.fragment_main) {
 
         etSearch.addTextChangedListener { viewModel.setStateSearch(it.toString()) }
 
-        ibSearch.setOnClickListener { viewModel.callCategoryHealthSearch() }
+        ibSearch.setOnClickListener {
+            activity?.hideSoftKeyboard()
+            viewModel.callCategoryHealthSearch()
+        }
 
         etSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {

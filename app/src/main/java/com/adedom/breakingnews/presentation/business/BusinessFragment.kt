@@ -91,7 +91,10 @@ class BusinessFragment : BaseFragment(R.layout.fragment_main) {
 
         etSearch.addTextChangedListener { viewModel.setStateSearch(it.toString()) }
 
-        ibSearch.setOnClickListener { viewModel.callCategoryBusinessSearch() }
+        ibSearch.setOnClickListener {
+            activity?.hideSoftKeyboard()
+            viewModel.callCategoryBusinessSearch()
+        }
 
         etSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {

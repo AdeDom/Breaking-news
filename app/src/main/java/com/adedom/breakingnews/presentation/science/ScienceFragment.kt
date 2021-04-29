@@ -91,7 +91,10 @@ class ScienceFragment : BaseFragment(R.layout.fragment_main) {
 
         etSearch.addTextChangedListener { viewModel.setStateSearch(it.toString()) }
 
-        ibSearch.setOnClickListener { viewModel.callCategoryScienceSearch() }
+        ibSearch.setOnClickListener {
+            activity?.hideSoftKeyboard()
+            viewModel.callCategoryScienceSearch()
+        }
 
         etSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {

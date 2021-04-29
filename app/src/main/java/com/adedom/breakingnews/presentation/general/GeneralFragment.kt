@@ -91,7 +91,10 @@ class GeneralFragment : BaseFragment(R.layout.fragment_main) {
 
         etSearch.addTextChangedListener { viewModel.setStateSearch(it.toString()) }
 
-        ibSearch.setOnClickListener { viewModel.callCategoryGeneralSearch() }
+        ibSearch.setOnClickListener {
+            activity?.hideSoftKeyboard()
+            viewModel.callCategoryGeneralSearch()
+        }
 
         etSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {

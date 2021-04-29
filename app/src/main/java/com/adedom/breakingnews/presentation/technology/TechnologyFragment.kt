@@ -91,7 +91,10 @@ class TechnologyFragment : BaseFragment(R.layout.fragment_main) {
 
         etSearch.addTextChangedListener { viewModel.setStateSearch(it.toString()) }
 
-        ibSearch.setOnClickListener { viewModel.callCategoryTechnologySearch() }
+        ibSearch.setOnClickListener {
+            activity?.hideSoftKeyboard()
+            viewModel.callCategoryTechnologySearch()
+        }
 
         etSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
