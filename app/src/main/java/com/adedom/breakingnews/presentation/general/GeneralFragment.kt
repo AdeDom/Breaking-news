@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adedom.breakingnews.R
 import com.adedom.breakingnews.base.BaseFragment
+import com.adedom.breakingnews.presentation.ArticleAdapter
 import com.adedom.breakingnews.presentation.model.DetailModel
 import com.adedom.breakingnews.utils.hideSoftKeyboard
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -18,7 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class GeneralFragment : BaseFragment(R.layout.fragment_main) {
 
     private val viewModel by viewModel<GeneralViewModel>()
-    private val mAdapter by lazy { GeneralAdapter() }
+    private val mAdapter by lazy { ArticleAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,4 +1,4 @@
-package com.adedom.breakingnews.presentation.general
+package com.adedom.breakingnews.presentation
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +11,7 @@ import com.adedom.breakingnews.data.db.entities.ArticleDb
 import com.adedom.breakingnews.utils.load
 import kotlinx.android.synthetic.main.item_main.view.*
 
-class GeneralAdapter : RecyclerView.Adapter<GeneralAdapter.GeneralViewHolder>() {
+class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
 
     private var listener: ((ArticleDb) -> Unit)? = null
 
@@ -30,12 +30,12 @@ class GeneralAdapter : RecyclerView.Adapter<GeneralAdapter.GeneralViewHolder>() 
     private val list: MutableList<ArticleDb>
         get() = asyncListDiffer.currentList
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GeneralViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_main, parent, false)
-        return GeneralViewHolder(view)
+        return ArticleViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: GeneralViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         holder.itemView.apply {
             val item = list[position]
 
@@ -57,6 +57,6 @@ class GeneralAdapter : RecyclerView.Adapter<GeneralAdapter.GeneralViewHolder>() 
         this.listener = listener
     }
 
-    inner class GeneralViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class ArticleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
 }
