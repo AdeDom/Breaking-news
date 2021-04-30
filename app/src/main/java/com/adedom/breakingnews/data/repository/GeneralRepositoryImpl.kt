@@ -19,9 +19,15 @@ class GeneralRepositoryImpl(
             breakingNewsDataSource.callBreakingNews(CategoryConstant.GENERAL, getCountry())
         }
         if (resource is Resource.Success) {
-            generalDataSource.deleteGeneral()
-            val generalEntity = mapBreakingNewsResponseToGeneralEntity(resource.data)
-            generalDataSource.saveGeneral(generalEntity)
+            val titleListDb = generalDataSource.getGeneralList()
+                .flatMap { it.articles }
+                .map { it.title }
+            val titleListApi = resource.data.articles.map { it.title }
+            if (titleListDb != titleListApi) {
+                generalDataSource.deleteGeneral()
+                val generalEntity = mapBreakingNewsResponseToGeneralEntity(resource.data)
+                generalDataSource.saveGeneral(generalEntity)
+            }
         }
         return resource
     }

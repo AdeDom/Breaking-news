@@ -19,9 +19,15 @@ class SportsRepositoryImpl(
             breakingNewsDataSource.callBreakingNews(CategoryConstant.SPORTS, getCountry())
         }
         if (resource is Resource.Success) {
-            sportsDataSource.deleteSports()
-            val generalEntity = mapBreakingNewsResponseToSportsEntity(resource.data)
-            sportsDataSource.saveSports(generalEntity)
+            val titleListDb = sportsDataSource.getSportsList()
+                .flatMap { it.articles }
+                .map { it.title }
+            val titleListApi = resource.data.articles.map { it.title }
+            if (titleListDb != titleListApi) {
+                sportsDataSource.deleteSports()
+                val generalEntity = mapBreakingNewsResponseToSportsEntity(resource.data)
+                sportsDataSource.saveSports(generalEntity)
+            }
         }
         return resource
     }

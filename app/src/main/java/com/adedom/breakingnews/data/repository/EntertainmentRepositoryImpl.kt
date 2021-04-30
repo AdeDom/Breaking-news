@@ -19,9 +19,15 @@ class EntertainmentRepositoryImpl(
             breakingNewsDataSource.callBreakingNews(CategoryConstant.ENTERTAINMENT, getCountry())
         }
         if (resource is Resource.Success) {
-            entertainmentDataSource.deleteEntertainment()
-            val generalEntity = mapBreakingNewsResponseToEntertainmentEntity(resource.data)
-            entertainmentDataSource.saveEntertainment(generalEntity)
+            val titleListDb = entertainmentDataSource.getEntertainmentList()
+                .flatMap { it.articles }
+                .map { it.title }
+            val titleListApi = resource.data.articles.map { it.title }
+            if (titleListDb != titleListApi) {
+                entertainmentDataSource.deleteEntertainment()
+                val generalEntity = mapBreakingNewsResponseToEntertainmentEntity(resource.data)
+                entertainmentDataSource.saveEntertainment(generalEntity)
+            }
         }
         return resource
     }

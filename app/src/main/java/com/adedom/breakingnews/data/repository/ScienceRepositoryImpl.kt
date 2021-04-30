@@ -19,9 +19,15 @@ class ScienceRepositoryImpl(
             breakingNewsDataSource.callBreakingNews(CategoryConstant.SCIENCE, getCountry())
         }
         if (resource is Resource.Success) {
-            scienceDataSource.deleteScience()
-            val generalEntity = mapBreakingNewsResponseToScienceEntity(resource.data)
-            scienceDataSource.saveScience(generalEntity)
+            val titleListDb = scienceDataSource.getScienceList()
+                .flatMap { it.articles }
+                .map { it.title }
+            val titleListApi = resource.data.articles.map { it.title }
+            if (titleListDb != titleListApi) {
+                scienceDataSource.deleteScience()
+                val generalEntity = mapBreakingNewsResponseToScienceEntity(resource.data)
+                scienceDataSource.saveScience(generalEntity)
+            }
         }
         return resource
     }

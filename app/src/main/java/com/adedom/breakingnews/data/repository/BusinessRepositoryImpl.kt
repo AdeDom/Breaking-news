@@ -19,9 +19,15 @@ class BusinessRepositoryImpl(
             breakingNewsDataSource.callBreakingNews(CategoryConstant.BUSINESS, getCountry())
         }
         if (resource is Resource.Success) {
-            businessDataSource.deleteBusiness()
-            val generalEntity = mapBreakingNewsResponseToBusinessEntity(resource.data)
-            businessDataSource.saveBusiness(generalEntity)
+            val titleListDb = businessDataSource.getBusinessList()
+                .flatMap { it.articles }
+                .map { it.title }
+            val titleListApi = resource.data.articles.map { it.title }
+            if (titleListDb != titleListApi) {
+                businessDataSource.deleteBusiness()
+                val generalEntity = mapBreakingNewsResponseToBusinessEntity(resource.data)
+                businessDataSource.saveBusiness(generalEntity)
+            }
         }
         return resource
     }

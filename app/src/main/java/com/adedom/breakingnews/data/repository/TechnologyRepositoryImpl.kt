@@ -19,9 +19,15 @@ class TechnologyRepositoryImpl(
             breakingNewsDataSource.callBreakingNews(CategoryConstant.TECHNOLOGY, getCountry())
         }
         if (resource is Resource.Success) {
-            technologyDataSource.deleteTechnology()
-            val generalEntity = mapBreakingNewsResponseToTechnologyEntity(resource.data)
-            technologyDataSource.saveTechnology(generalEntity)
+            val titleListDb = technologyDataSource.getTechnologyList()
+                .flatMap { it.articles }
+                .map { it.title }
+            val titleListApi = resource.data.articles.map { it.title }
+            if (titleListDb != titleListApi) {
+                technologyDataSource.deleteTechnology()
+                val generalEntity = mapBreakingNewsResponseToTechnologyEntity(resource.data)
+                technologyDataSource.saveTechnology(generalEntity)
+            }
         }
         return resource
     }

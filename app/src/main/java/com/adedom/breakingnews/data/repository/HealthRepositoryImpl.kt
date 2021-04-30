@@ -19,9 +19,15 @@ class HealthRepositoryImpl(
             breakingNewsDataSource.callBreakingNews(CategoryConstant.HEALTH, getCountry())
         }
         if (resource is Resource.Success) {
-            healthDataSource.deleteHealth()
-            val generalEntity = mapBreakingNewsResponseToHealthEntity(resource.data)
-            healthDataSource.saveHealth(generalEntity)
+            val titleListDb = healthDataSource.getHealthList()
+                .flatMap { it.articles }
+                .map { it.title }
+            val titleListApi = resource.data.articles.map { it.title }
+            if (titleListDb != titleListApi) {
+                healthDataSource.deleteHealth()
+                val generalEntity = mapBreakingNewsResponseToHealthEntity(resource.data)
+                healthDataSource.saveHealth(generalEntity)
+            }
         }
         return resource
     }
