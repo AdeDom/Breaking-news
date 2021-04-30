@@ -1,5 +1,7 @@
 package com.adedom.breakingnews.data.repository
 
+import com.adedom.breakingnews.data.db.entities.ArticleDb
+import com.adedom.breakingnews.data.db.entities.GeneralEntity
 import com.adedom.breakingnews.data.model.response.ArticleData
 import com.adedom.breakingnews.data.model.response.BreakingNewsResponse
 import com.adedom.breakingnews.data.model.response.SourceData
@@ -35,6 +37,23 @@ class GeneralRepositoryImplTest {
     @Test
     fun callCategoryGeneral_success() = runBlocking {
         val response = responseSuccess()
+        val entityList = listOf(
+            GeneralEntity(
+                1,
+                listOf(
+                    ArticleDb(
+                        id = 1,
+                        author = "Thairath",
+                        title = "\"ศิริราช\" แจง บุคลากร 3 ราย ชาแขน ขา ใบหน้าด้านซ้าย หลังฉีดวัคซีนโควิด - ไทยรัฐ",
+                        description = "รพ.ศิริราช ชี้แจงกรณีบุคลากรของคณะแพทยศาสตร์ 3 ราย ฉีดวัคซีนโควิด-19 แล้วเกิดผลข้างเคียง มีอาการชาบริเวณแขน ขา ใบหน้าด้านซ้าย",
+                        url = "https://www.thairath.co.th/news/society/2075966",
+                        urlToImage = "https://static.thairath.co.th/media/dFQROr7oWzulq5Fa4VuAeHo1zLbnAcXrvxHLvH9G5Rz8Heao69vWyGq85D5arN2qykr.jpg",
+                        publishedAt = "2021-04-23T13:17:12Z",
+                    ),
+                )
+            )
+        )
+        coEvery { generalDataSource.getGeneralList() } returns entityList
         coEvery { breakingNewsDataSource.callBreakingNews(any(), any()) } returns response
 
         val resource = repository.callCategoryGeneral()

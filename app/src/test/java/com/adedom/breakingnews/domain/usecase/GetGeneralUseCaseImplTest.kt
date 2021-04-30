@@ -64,7 +64,7 @@ class GetGeneralUseCaseImplTest {
             title = "\"ศิริราช\" แจง บุคลากร 3 ราย ชาแขน ขา ใบหน้าด้านซ้าย หลังฉีดวัคซีนโควิด - ไทยรัฐ",
             description = "รพ.ศิริราช ชี้แจงกรณีบุคลากรของคณะแพทยศาสตร์ 3 ราย ฉีดวัคซีนโควิด-19 แล้วเกิดผลข้างเคียง มีอาการชาบริเวณแขน ขา ใบหน้าด้านซ้าย",
             urlToImage = "https://static.thairath.co.th/media/dFQROr7oWzulq5Fa4VuAeHo1zLbnAcXrvxHLvH9G5Rz8Heao69vWyGq85D5arN2qykr.jpg",
-            publishedAt = "23/4/2021",
+            publishedAt = "23/4/2021 13:17",
         )
         val articleDb4 = ArticleDb(
             id = 234567,
@@ -72,7 +72,7 @@ class GetGeneralUseCaseImplTest {
             title = "ไฟไหม้ รพ.อินเดีย ซ้ำเติมวิกฤตโควิด เสียชีวิต 13 คน - Thai PBS News",
             description = null,
             urlToImage = null,
-            publishedAt = "23/4/2021",
+            publishedAt = "23/4/2021 12:59",
         )
         val generalEntity = GeneralEntity(2, listOf(articleDb3, articleDb4, articleDb3, articleDb4))
         assertThat(result).isEqualTo(generalEntity)
