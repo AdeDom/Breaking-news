@@ -22,7 +22,7 @@ class GetSportsUseCaseImpl(
 
     override fun mapSportsEntitySetDate(sportsEntityList: List<SportsEntity>): SportsEntity {
         val originFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
-        val destinationFormat = SimpleDateFormat("d/M/yyyy", Locale.getDefault())
+        val destinationFormat = SimpleDateFormat("d/M/yyyy H:m", Locale.getDefault())
         return SportsEntity(
             totalResults = if (sportsEntityList.isEmpty()) 0 else sportsEntityList[0].totalResults,
             articles = sportsEntityList.flatMap { it.articles }

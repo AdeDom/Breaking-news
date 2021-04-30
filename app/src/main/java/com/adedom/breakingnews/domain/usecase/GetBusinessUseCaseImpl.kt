@@ -22,7 +22,7 @@ class GetBusinessUseCaseImpl(
 
     override fun mapBusinessEntitySetDate(businessEntityList: List<BusinessEntity>): BusinessEntity {
         val originFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
-        val destinationFormat = SimpleDateFormat("d/M/yyyy", Locale.getDefault())
+        val destinationFormat = SimpleDateFormat("d/M/yyyy H:m", Locale.getDefault())
         return BusinessEntity(
             totalResults = if (businessEntityList.isEmpty()) 0 else businessEntityList[0].totalResults,
             articles = businessEntityList.flatMap { it.articles }

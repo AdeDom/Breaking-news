@@ -22,7 +22,7 @@ class GetGeneralUseCaseImpl(
 
     override fun mapGeneralEntitySetDate(generalEntityList: List<GeneralEntity>): GeneralEntity {
         val originFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
-        val destinationFormat = SimpleDateFormat("d/M/yyyy", Locale.getDefault())
+        val destinationFormat = SimpleDateFormat("d/M/yyyy H:m", Locale.getDefault())
         return GeneralEntity(
             totalResults = if (generalEntityList.isEmpty()) 0 else generalEntityList[0].totalResults,
             articles = generalEntityList.flatMap { it.articles }

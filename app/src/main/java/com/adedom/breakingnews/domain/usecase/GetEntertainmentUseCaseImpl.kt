@@ -22,7 +22,7 @@ class GetEntertainmentUseCaseImpl(
 
     override fun mapEntertainmentEntitySetDate(entertainmentEntityList: List<EntertainmentEntity>): EntertainmentEntity {
         val originFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
-        val destinationFormat = SimpleDateFormat("d/M/yyyy", Locale.getDefault())
+        val destinationFormat = SimpleDateFormat("d/M/yyyy H:m", Locale.getDefault())
         return EntertainmentEntity(
             totalResults = if (entertainmentEntityList.isEmpty()) 0 else entertainmentEntityList[0].totalResults,
             articles = entertainmentEntityList.flatMap { it.articles }

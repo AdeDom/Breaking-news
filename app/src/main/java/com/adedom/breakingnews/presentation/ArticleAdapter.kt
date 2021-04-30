@@ -3,6 +3,7 @@ package com.adedom.breakingnews.presentation
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -41,7 +42,9 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() 
 
             tvTitle.text = item.title
             tvDescription.text = item.description
-            ivImage.load(item.urlToImage)
+
+            ivImage.isVisible = item.urlToImage != null
+            item.urlToImage?.let { ivImage.load(item.urlToImage) }
 
             setOnClickListener {
                 listener?.invoke(item)

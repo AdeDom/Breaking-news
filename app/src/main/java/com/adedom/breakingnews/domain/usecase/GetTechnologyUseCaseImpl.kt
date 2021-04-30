@@ -22,7 +22,7 @@ class GetTechnologyUseCaseImpl(
 
     override fun mapTechnologyEntitySetDate(technologyEntityList: List<TechnologyEntity>): TechnologyEntity {
         val originFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
-        val destinationFormat = SimpleDateFormat("d/M/yyyy", Locale.getDefault())
+        val destinationFormat = SimpleDateFormat("d/M/yyyy H:m", Locale.getDefault())
         return TechnologyEntity(
             totalResults = if (technologyEntityList.isEmpty()) 0 else technologyEntityList[0].totalResults,
             articles = technologyEntityList.flatMap { it.articles }

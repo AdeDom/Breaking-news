@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import com.adedom.breakingnews.R
 import com.adedom.breakingnews.base.BaseFragment
@@ -31,7 +32,9 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail) {
         }
         tvAuthor.text = args.detail.author
         tvPublishedAt.text = args.detail.publishedAt
-        ivImage.load(args.detail.urlToImage)
+
+        ivImage.isVisible = args.detail.urlToImage != null
+        args.detail.urlToImage?.let { ivImage.load(args.detail.urlToImage) }
     }
 
     private fun viewEvent() {

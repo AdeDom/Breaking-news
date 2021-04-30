@@ -22,7 +22,7 @@ class GetHealthUseCaseImpl(
 
     override fun mapHealthEntitySetDate(healthEntityList: List<HealthEntity>): HealthEntity {
         val originFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
-        val destinationFormat = SimpleDateFormat("d/M/yyyy", Locale.getDefault())
+        val destinationFormat = SimpleDateFormat("d/M/yyyy H:m", Locale.getDefault())
         return HealthEntity(
             totalResults = if (healthEntityList.isEmpty()) 0 else healthEntityList[0].totalResults,
             articles = healthEntityList.flatMap { it.articles }

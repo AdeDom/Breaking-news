@@ -22,7 +22,7 @@ class GetScienceUseCaseImpl(
 
     override fun mapScienceEntitySetDate(scienceEntityList: List<ScienceEntity>): ScienceEntity {
         val originFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
-        val destinationFormat = SimpleDateFormat("d/M/yyyy", Locale.getDefault())
+        val destinationFormat = SimpleDateFormat("d/M/yyyy H:m", Locale.getDefault())
         return ScienceEntity(
             totalResults = if (scienceEntityList.isEmpty()) 0 else scienceEntityList[0].totalResults,
             articles = scienceEntityList.flatMap { it.articles }
