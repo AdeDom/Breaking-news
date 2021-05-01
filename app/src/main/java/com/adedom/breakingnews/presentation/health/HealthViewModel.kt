@@ -28,9 +28,10 @@ class HealthViewModel(
 
     fun callCategoryHealthNextPage(
         itemPosition: Int,
-        healthSizeNow: Int? = getHealth.value?.articles?.size
+        healthSizeNow: Int? = getHealth.value?.articles?.size,
+        totalResults: Int? = getHealth.value?.totalResults
     ) {
-        if (healthSizeNow == itemPosition + 1 && healthSizeNow in (20..99)) {
+        if (healthSizeNow == itemPosition + 1 && healthSizeNow in (20..(totalResults ?: 20))) {
             launch {
                 setState { copy(isLoading = true) }
 

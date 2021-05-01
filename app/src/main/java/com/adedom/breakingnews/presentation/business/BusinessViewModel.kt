@@ -28,9 +28,10 @@ class BusinessViewModel(
 
     fun callCategoryBusinessNextPage(
         itemPosition: Int,
-        businessSizeNow: Int? = getBusiness.value?.articles?.size
+        businessSizeNow: Int? = getBusiness.value?.articles?.size,
+        totalResults: Int? = getBusiness.value?.totalResults
     ) {
-        if (businessSizeNow == itemPosition + 1 && businessSizeNow in (20..99)) {
+        if (businessSizeNow == itemPosition + 1 && businessSizeNow in (20..(totalResults ?: 20))) {
             launch {
                 setState { copy(isLoading = true) }
 

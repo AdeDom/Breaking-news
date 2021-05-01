@@ -33,7 +33,9 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail) {
         tvAuthor.text = args.detail.author
         tvPublishedAt.text = args.detail.publishedAt
 
-        ivImage.isVisible = args.detail.urlToImage != null
+        tvDescription.isVisible = !args.detail.description.isNullOrBlank()
+
+        ivImage.isVisible = !args.detail.urlToImage.isNullOrBlank()
         args.detail.urlToImage?.let { ivImage.load(args.detail.urlToImage) }
     }
 

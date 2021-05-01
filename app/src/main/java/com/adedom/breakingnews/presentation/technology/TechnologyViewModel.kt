@@ -28,9 +28,10 @@ class TechnologyViewModel(
 
     fun callCategoryTechnologyNextPage(
         itemPosition: Int,
-        technologySizeNow: Int? = getTechnology.value?.articles?.size
+        technologySizeNow: Int? = getTechnology.value?.articles?.size,
+        totalResults: Int? = getTechnology.value?.totalResults
     ) {
-        if (technologySizeNow == itemPosition + 1 && technologySizeNow in (20..99)) {
+        if (technologySizeNow == itemPosition + 1 && technologySizeNow in (20..(totalResults ?: 20))) {
             launch {
                 setState { copy(isLoading = true) }
 

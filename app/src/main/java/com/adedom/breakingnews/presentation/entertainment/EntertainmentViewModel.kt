@@ -28,9 +28,10 @@ class EntertainmentViewModel(
 
     fun callCategoryEntertainmentNextPage(
         itemPosition: Int,
-        entertainmentSizeNow: Int? = getEntertainment.value?.articles?.size
+        entertainmentSizeNow: Int? = getEntertainment.value?.articles?.size,
+        totalResults: Int? = getEntertainment.value?.totalResults
     ) {
-        if (entertainmentSizeNow == itemPosition + 1 && entertainmentSizeNow in (20..99)) {
+        if (entertainmentSizeNow == itemPosition + 1 && entertainmentSizeNow in (20..(totalResults ?: 20))) {
             launch {
                 setState { copy(isLoading = true) }
 

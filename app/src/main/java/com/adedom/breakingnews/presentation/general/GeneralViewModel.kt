@@ -28,9 +28,10 @@ class GeneralViewModel(
 
     fun callCategoryGeneralNextPage(
         itemPosition: Int,
-        generalSizeNow: Int? = getGeneral.value?.articles?.size
+        generalSizeNow: Int? = getGeneral.value?.articles?.size,
+        totalResults: Int? = getGeneral.value?.totalResults
     ) {
-        if (generalSizeNow == itemPosition + 1 && generalSizeNow in (20..99)) {
+        if (generalSizeNow == itemPosition + 1 && generalSizeNow in (20..(totalResults ?: 20))) {
             launch {
                 setState { copy(isLoading = true) }
 

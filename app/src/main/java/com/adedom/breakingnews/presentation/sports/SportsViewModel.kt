@@ -28,9 +28,10 @@ class SportsViewModel(
 
     fun callCategorySportsNextPage(
         itemPosition: Int,
-        sportsSizeNow: Int? = getSports.value?.articles?.size
+        sportsSizeNow: Int? = getSports.value?.articles?.size,
+        totalResults: Int? = getSports.value?.totalResults
     ) {
-        if (sportsSizeNow == itemPosition + 1 && sportsSizeNow in (20..99)) {
+        if (sportsSizeNow == itemPosition + 1 && sportsSizeNow in (20..(totalResults ?: 20))) {
             launch {
                 setState { copy(isLoading = true) }
 

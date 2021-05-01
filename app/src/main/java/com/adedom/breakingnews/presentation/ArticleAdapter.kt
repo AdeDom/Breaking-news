@@ -1,5 +1,8 @@
 package com.adedom.breakingnews.presentation
 
+import android.graphics.Typeface
+import android.text.SpannableString
+import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,7 +46,17 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() 
             tvTitle.text = item.title
             tvDescription.text = item.description
 
-            ivImage.isVisible = item.urlToImage != null
+            if (item.urlToImage.isNullOrBlank()) {
+                tvTitle.isSingleLine = false
+                tvDescription.isSingleLine = false
+                tvTitle.text = SpannableString(item.title).apply {
+                    setSpan(StyleSpan(Typeface.BOLD), 0, this.length, 0)
+                }
+            }
+
+            tvDescription.isVisible = !item.description.isNullOrBlank()
+
+            ivImage.isVisible = !item.urlToImage.isNullOrBlank()
             item.urlToImage?.let { ivImage.load(item.urlToImage) }
 
             setOnClickListener {
