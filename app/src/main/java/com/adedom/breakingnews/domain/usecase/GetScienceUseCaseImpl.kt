@@ -26,6 +26,7 @@ class GetScienceUseCaseImpl(
         return ScienceEntity(
             totalResults = if (scienceEntityList.isEmpty()) 0 else scienceEntityList[0].totalResults,
             articles = scienceEntityList.flatMap { it.articles }
+                .distinctBy { it.title }
                 .map {
                     val publishedAt = try {
                         it.publishedAt?.let { publishedAt ->

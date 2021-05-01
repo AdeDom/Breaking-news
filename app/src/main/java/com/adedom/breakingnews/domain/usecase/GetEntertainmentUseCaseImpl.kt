@@ -26,6 +26,7 @@ class GetEntertainmentUseCaseImpl(
         return EntertainmentEntity(
             totalResults = if (entertainmentEntityList.isEmpty()) 0 else entertainmentEntityList[0].totalResults,
             articles = entertainmentEntityList.flatMap { it.articles }
+                .distinctBy { it.title }
                 .map {
                     val publishedAt = try {
                         it.publishedAt?.let { publishedAt ->

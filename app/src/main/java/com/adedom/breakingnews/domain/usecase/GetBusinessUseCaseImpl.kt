@@ -26,6 +26,7 @@ class GetBusinessUseCaseImpl(
         return BusinessEntity(
             totalResults = if (businessEntityList.isEmpty()) 0 else businessEntityList[0].totalResults,
             articles = businessEntityList.flatMap { it.articles }
+                .distinctBy { it.title }
                 .map {
                     val publishedAt = try {
                         it.publishedAt?.let { publishedAt ->

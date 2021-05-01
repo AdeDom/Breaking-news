@@ -26,6 +26,7 @@ class GetHealthUseCaseImpl(
         return HealthEntity(
             totalResults = if (healthEntityList.isEmpty()) 0 else healthEntityList[0].totalResults,
             articles = healthEntityList.flatMap { it.articles }
+                .distinctBy { it.title }
                 .map {
                     val publishedAt = try {
                         it.publishedAt?.let { publishedAt ->

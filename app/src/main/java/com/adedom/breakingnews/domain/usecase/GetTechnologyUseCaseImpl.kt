@@ -26,6 +26,7 @@ class GetTechnologyUseCaseImpl(
         return TechnologyEntity(
             totalResults = if (technologyEntityList.isEmpty()) 0 else technologyEntityList[0].totalResults,
             articles = technologyEntityList.flatMap { it.articles }
+                .distinctBy { it.title }
                 .map {
                     val publishedAt = try {
                         it.publishedAt?.let { publishedAt ->

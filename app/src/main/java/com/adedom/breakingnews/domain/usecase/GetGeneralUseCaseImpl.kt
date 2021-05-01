@@ -26,6 +26,7 @@ class GetGeneralUseCaseImpl(
         return GeneralEntity(
             totalResults = if (generalEntityList.isEmpty()) 0 else generalEntityList[0].totalResults,
             articles = generalEntityList.flatMap { it.articles }
+                .distinctBy { it.title }
                 .map {
                     val publishedAt = try {
                         it.publishedAt?.let { publishedAt ->

@@ -74,7 +74,7 @@ class GetGeneralUseCaseImplTest {
             urlToImage = null,
             publishedAt = "23/4/2021 12:59",
         )
-        val generalEntity = GeneralEntity(2, listOf(articleDb3, articleDb4, articleDb3, articleDb4))
+        val generalEntity = GeneralEntity(2, listOf(articleDb3, articleDb4))
         assertThat(result).isEqualTo(generalEntity)
     }
 
