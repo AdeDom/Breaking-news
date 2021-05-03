@@ -49,11 +49,6 @@ class BusinessFragment : BaseFragment(R.layout.fragment_main) {
             })
             adapter = mAdapter
         }
-
-        swipeRefreshLayout.setOnRefreshListener {
-            viewModel.callCategoryBusiness()
-            swipeRefreshLayout.isRefreshing = false
-        }
     }
 
     private fun observeViewModel() {
@@ -74,6 +69,7 @@ class BusinessFragment : BaseFragment(R.layout.fragment_main) {
     private fun viewEvent() {
         mAdapter.setOnClickListener {
             activity?.hideSoftKeyboard()
+            swipeRefreshLayout.isRefreshing = false
 
             val model = DetailModel(
                 id = it.id,
@@ -103,6 +99,11 @@ class BusinessFragment : BaseFragment(R.layout.fragment_main) {
                 return@setOnEditorActionListener true
             }
             false
+        }
+
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.callCategoryBusiness()
+            swipeRefreshLayout.isRefreshing = false
         }
     }
 
