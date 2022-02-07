@@ -4,16 +4,14 @@ import android.graphics.Typeface
 import android.text.SpannableString
 import android.text.style.StyleSpan
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.adedom.breakingnews.R
 import com.adedom.breakingnews.data.db.entities.ArticleDb
+import com.adedom.breakingnews.databinding.ItemMainBinding
 import com.adedom.breakingnews.utils.load
-import kotlinx.android.synthetic.main.item_main.view.*
 
 class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() {
 
@@ -35,12 +33,16 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() 
         get() = asyncListDiffer.currentList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_main, parent, false)
-        return ArticleViewHolder(view)
+        val binding = ItemMainBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false,
+        )
+        return ArticleViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
-        holder.itemView.apply {
+        holder.binding.apply {
             val item = list[position]
 
             tvTitle.text = item.title
@@ -59,7 +61,7 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() 
             ivImage.isVisible = !item.urlToImage.isNullOrBlank()
             item.urlToImage?.let { ivImage.load(item.urlToImage) }
 
-            setOnClickListener {
+            root.setOnClickListener {
                 listener?.invoke(item)
             }
         }
@@ -73,6 +75,8 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() 
         this.listener = listener
     }
 
-    inner class ArticleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class ArticleViewHolder(
+        val binding: ItemMainBinding
+    ) : RecyclerView.ViewHolder(binding.root)
 
 }

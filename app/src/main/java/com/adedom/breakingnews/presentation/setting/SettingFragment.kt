@@ -1,15 +1,27 @@
 package com.adedom.breakingnews.presentation.setting
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import com.adedom.breakingnews.R
+import android.view.ViewGroup
 import com.adedom.breakingnews.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_setting.*
+import com.adedom.breakingnews.databinding.FragmentSettingBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SettingFragment : BaseFragment(R.layout.fragment_setting) {
+class SettingFragment : BaseFragment() {
+
+    private lateinit var binding: FragmentSettingBinding
 
     private val viewModel by viewModel<SettingViewModel>()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentSettingBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -18,9 +30,9 @@ class SettingFragment : BaseFragment(R.layout.fragment_setting) {
     }
 
     private fun setUpView() {
-        swSearchThaiNews.isChecked = viewModel.getIsSearchOnlyThaiNews()
+        binding.swSearchThaiNews.isChecked = viewModel.getIsSearchOnlyThaiNews()
 
-        swSearchThaiNews.setOnCheckedChangeListener { _, isChecked ->
+        binding.swSearchThaiNews.setOnCheckedChangeListener { _, isChecked ->
             viewModel.setIsSearchOnlyThaiNews(isChecked)
         }
     }

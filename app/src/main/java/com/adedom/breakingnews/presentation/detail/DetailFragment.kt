@@ -5,17 +5,29 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
-import com.adedom.breakingnews.R
 import com.adedom.breakingnews.base.BaseFragment
+import com.adedom.breakingnews.databinding.FragmentDetailBinding
 import com.adedom.breakingnews.utils.load
-import kotlinx.android.synthetic.main.fragment_detail.*
 
-class DetailFragment : BaseFragment(R.layout.fragment_detail) {
+class DetailFragment : BaseFragment() {
+
+    private lateinit var binding: FragmentDetailBinding
 
     private val args by navArgs<DetailFragmentArgs>()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentDetailBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -25,22 +37,22 @@ class DetailFragment : BaseFragment(R.layout.fragment_detail) {
     }
 
     private fun setUpView() {
-        tvTitle.text = args.detail.title
-        tvDescription.text = args.detail.description
-        tvUrl.text = SpannableString(args.detail.url).apply {
+        binding.tvTitle.text = args.detail.title
+        binding.tvDescription.text = args.detail.description
+        binding.tvUrl.text = SpannableString(args.detail.url).apply {
             setSpan(UnderlineSpan(), 0, this.length, 0)
         }
-        tvAuthor.text = args.detail.author
-        tvPublishedAt.text = args.detail.publishedAt
+        binding.tvAuthor.text = args.detail.author
+        binding.tvPublishedAt.text = args.detail.publishedAt
 
-        tvDescription.isVisible = !args.detail.description.isNullOrBlank()
+        binding.tvDescription.isVisible = !args.detail.description.isNullOrBlank()
 
-        ivImage.isVisible = !args.detail.urlToImage.isNullOrBlank()
-        args.detail.urlToImage?.let { ivImage.load(args.detail.urlToImage) }
+        binding.ivImage.isVisible = !args.detail.urlToImage.isNullOrBlank()
+        args.detail.urlToImage?.let { binding.ivImage.load(args.detail.urlToImage) }
     }
 
     private fun viewEvent() {
-        tvUrl.setOnClickListener {
+        binding.tvUrl.setOnClickListener {
             Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse(args.detail.url)
                 startActivity(this)
