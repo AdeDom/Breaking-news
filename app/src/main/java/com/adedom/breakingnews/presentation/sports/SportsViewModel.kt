@@ -19,6 +19,8 @@ class SportsViewModel(
             setState { copy(isLoading = true) }
 
             when (val resource = getSportsUseCase.callCategorySports()) {
+                is Resource.Success -> {
+                }
                 is Resource.Error -> setError(resource.throwable)
             }
 
@@ -36,6 +38,8 @@ class SportsViewModel(
                 setState { copy(isLoading = true) }
 
                 when (val resource = getSportsUseCase.callCategorySportsNextPage()) {
+                    is Resource.Success -> {
+                    }
                     is Resource.Error -> setError(resource.throwable)
                 }
 
@@ -54,6 +58,8 @@ class SportsViewModel(
 
             val search = state.value?.search ?: return@launch
             when (val resource = getSportsUseCase.callCategorySportsSearch(query = search)) {
+                is Resource.Success -> {
+                }
                 is Resource.Error -> setError(resource.throwable)
             }
 

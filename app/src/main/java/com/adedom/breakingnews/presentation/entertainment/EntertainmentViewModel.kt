@@ -19,6 +19,8 @@ class EntertainmentViewModel(
             setState { copy(isLoading = true) }
 
             when (val resource = getEntertainmentUseCase.callCategoryEntertainment()) {
+                is Resource.Success -> {
+                }
                 is Resource.Error -> setError(resource.throwable)
             }
 
@@ -36,6 +38,8 @@ class EntertainmentViewModel(
                 setState { copy(isLoading = true) }
 
                 when (val resource = getEntertainmentUseCase.callCategoryEntertainmentNextPage()) {
+                    is Resource.Success -> {
+                    }
                     is Resource.Error -> setError(resource.throwable)
                 }
 
@@ -54,6 +58,8 @@ class EntertainmentViewModel(
 
             val search = state.value?.search ?: return@launch
             when (val resource = getEntertainmentUseCase.callCategoryEntertainmentSearch(query = search)) {
+                is Resource.Success -> {
+                }
                 is Resource.Error -> setError(resource.throwable)
             }
 

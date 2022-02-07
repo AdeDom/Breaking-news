@@ -19,6 +19,8 @@ class GeneralViewModel(
             setState { copy(isLoading = true) }
 
             when (val resource = getGeneralUseCase.callCategoryGeneral()) {
+                is Resource.Success -> {
+                }
                 is Resource.Error -> setError(resource.throwable)
             }
 
@@ -36,6 +38,8 @@ class GeneralViewModel(
                 setState { copy(isLoading = true) }
 
                 when (val resource = getGeneralUseCase.callCategoryGeneralNextPage()) {
+                    is Resource.Success -> {
+                    }
                     is Resource.Error -> setError(resource.throwable)
                 }
 
@@ -54,6 +58,8 @@ class GeneralViewModel(
 
             val search = state.value?.search ?: return@launch
             when (val resource = getGeneralUseCase.callCategoryGeneralSearch(query = search)) {
+                is Resource.Success -> {
+                }
                 is Resource.Error -> setError(resource.throwable)
             }
 

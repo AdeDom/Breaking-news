@@ -19,6 +19,8 @@ class HealthViewModel(
             setState { copy(isLoading = true) }
 
             when (val resource = getHealthUseCase.callCategoryHealth()) {
+                is Resource.Success -> {
+                }
                 is Resource.Error -> setError(resource.throwable)
             }
 
@@ -36,6 +38,8 @@ class HealthViewModel(
                 setState { copy(isLoading = true) }
 
                 when (val resource = getHealthUseCase.callCategoryHealthNextPage()) {
+                    is Resource.Success -> {
+                    }
                     is Resource.Error -> setError(resource.throwable)
                 }
 
@@ -54,6 +58,8 @@ class HealthViewModel(
 
             val search = state.value?.search ?: return@launch
             when (val resource = getHealthUseCase.callCategoryHealthSearch(query = search)) {
+                is Resource.Success -> {
+                }
                 is Resource.Error -> setError(resource.throwable)
             }
 

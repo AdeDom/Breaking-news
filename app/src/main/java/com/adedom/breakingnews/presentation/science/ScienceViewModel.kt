@@ -19,6 +19,8 @@ class ScienceViewModel(
             setState { copy(isLoading = true) }
 
             when (val resource = getScienceUseCase.callCategoryScience()) {
+                is Resource.Success -> {
+                }
                 is Resource.Error -> setError(resource.throwable)
             }
 
@@ -36,6 +38,8 @@ class ScienceViewModel(
                 setState { copy(isLoading = true) }
 
                 when (val resource = getScienceUseCase.callCategoryScienceNextPage()) {
+                    is Resource.Success -> {
+                    }
                     is Resource.Error -> setError(resource.throwable)
                 }
 
@@ -54,6 +58,8 @@ class ScienceViewModel(
 
             val search = state.value?.search ?: return@launch
             when (val resource = getScienceUseCase.callCategoryScienceSearch(query = search)) {
+                is Resource.Success -> {
+                }
                 is Resource.Error -> setError(resource.throwable)
             }
 

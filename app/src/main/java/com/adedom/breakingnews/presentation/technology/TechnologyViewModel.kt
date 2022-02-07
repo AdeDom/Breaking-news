@@ -19,6 +19,8 @@ class TechnologyViewModel(
             setState { copy(isLoading = true) }
 
             when (val resource = getTechnologyUseCase.callCategoryTechnology()) {
+                is Resource.Success -> {
+                }
                 is Resource.Error -> setError(resource.throwable)
             }
 
@@ -36,6 +38,8 @@ class TechnologyViewModel(
                 setState { copy(isLoading = true) }
 
                 when (val resource = getTechnologyUseCase.callCategoryTechnologyNextPage()) {
+                    is Resource.Success -> {
+                    }
                     is Resource.Error -> setError(resource.throwable)
                 }
 
@@ -54,6 +58,8 @@ class TechnologyViewModel(
 
             val search = state.value?.search ?: return@launch
             when (val resource = getTechnologyUseCase.callCategoryTechnologySearch(query = search)) {
+                is Resource.Success -> {
+                }
                 is Resource.Error -> setError(resource.throwable)
             }
 

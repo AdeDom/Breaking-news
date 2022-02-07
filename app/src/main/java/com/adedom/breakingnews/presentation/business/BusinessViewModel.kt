@@ -19,6 +19,8 @@ class BusinessViewModel(
             setState { copy(isLoading = true) }
 
             when (val resource = getBusinessUseCase.callCategoryBusiness()) {
+                is Resource.Success -> {
+                }
                 is Resource.Error -> setError(resource.throwable)
             }
 
@@ -36,6 +38,8 @@ class BusinessViewModel(
                 setState { copy(isLoading = true) }
 
                 when (val resource = getBusinessUseCase.callCategoryBusinessNextPage()) {
+                    is Resource.Success -> {
+                    }
                     is Resource.Error -> setError(resource.throwable)
                 }
 
@@ -54,6 +58,8 @@ class BusinessViewModel(
 
             val search = state.value?.search ?: return@launch
             when (val resource = getBusinessUseCase.callCategoryBusinessSearch(query = search)) {
+                is Resource.Success -> {
+                }
                 is Resource.Error -> setError(resource.throwable)
             }
 
