@@ -14,12 +14,12 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.core.context.KoinContextHandler
+import org.koin.core.context.stopKoin
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.P])
-class TicTacToeDaoTest {
+class GeneralDaoTest {
 
     private lateinit var db: AppDatabase
     private lateinit var dao: GeneralDao
@@ -34,7 +34,7 @@ class TicTacToeDaoTest {
     @After
     fun cleanUp() {
         db.close()
-        KoinContextHandler.stop()
+        stopKoin()
     }
 
     @Test

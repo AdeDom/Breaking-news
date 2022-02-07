@@ -10,7 +10,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.koin.core.context.KoinContextHandler
+import org.koin.core.context.stopKoin
 
 class GeneralDataSourceImplTest {
 
@@ -24,7 +24,7 @@ class GeneralDataSourceImplTest {
 
     @After
     fun cleanUp() {
-        KoinContextHandler.stop()
+        stopKoin()
     }
 
     @Test

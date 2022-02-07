@@ -14,7 +14,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.core.context.KoinContextHandler
+import org.koin.core.context.stopKoin
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
@@ -34,7 +34,7 @@ class GeneralViewModelTest {
 
     @After
     fun cleanup() {
-        KoinContextHandler.stop()
+        stopKoin()
     }
 
     @Test

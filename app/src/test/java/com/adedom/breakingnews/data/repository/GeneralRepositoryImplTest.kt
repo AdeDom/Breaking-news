@@ -15,7 +15,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.koin.core.context.KoinContextHandler
+import org.koin.core.context.stopKoin
 
 class GeneralRepositoryImplTest {
 
@@ -31,7 +31,7 @@ class GeneralRepositoryImplTest {
 
     @After
     fun cleanUp() {
-        KoinContextHandler.stop()
+        stopKoin()
     }
 
     @Test
