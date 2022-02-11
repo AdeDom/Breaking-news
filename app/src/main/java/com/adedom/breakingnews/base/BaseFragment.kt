@@ -15,12 +15,15 @@ abstract class BaseFragment : Fragment() {
 
     open fun setupAdapter() {}
 
+    open fun setupView() {}
+
     open fun setupEvent() {}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViewModel()
         setupAdapter()
+        setupView()
         setupEvent()
     }
 

@@ -29,13 +29,7 @@ class DetailFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        setUpView()
-    }
-
-    private fun setUpView() {
+    override fun setupView() {
         binding.tvTitle.text = args.detail.title
         binding.tvDescription.text = args.detail.description
         binding.tvUrl.text = SpannableString(args.detail.url).apply {

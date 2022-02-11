@@ -23,13 +23,7 @@ class SettingFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        setUpView()
-    }
-
-    private fun setUpView() {
+    override fun setupView() {
         binding.swSearchThaiNews.isChecked = viewModel.getIsSearchOnlyThaiNews()
 
         binding.swSearchThaiNews.setOnCheckedChangeListener { _, isChecked ->
