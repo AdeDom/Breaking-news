@@ -1,6 +1,6 @@
 package com.adedom.breakingnews.presentation.health
 
-data class HealthViewState(
+data class HealthUiState(
     val search: String = "",
     val isLoading: Boolean = false,
 )

@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class HealthViewModel(
     private val getHealthUseCase: GetHealthUseCase,
-) : BaseViewModel<HealthViewState>(HealthViewState()) {
+) : BaseViewModel<HealthUiState>(HealthUiState()) {
 
     val getHealth: LiveData<HealthEntity> = getHealthUseCase().asLiveData()
 

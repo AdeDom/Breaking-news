@@ -1,6 +1,6 @@
 package com.adedom.breakingnews.presentation.business
 
-data class BusinessViewState(
+data class BusinessUiState(
     val search: String = "",
     val isLoading: Boolean = false,
 )

@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class GeneralViewModel(
     private val getGeneralUseCase: GetGeneralUseCase,
-) : BaseViewModel<GeneralViewState>(GeneralViewState()) {
+) : BaseViewModel<GeneralUiState>(GeneralUiState()) {
 
     val getGeneral: LiveData<GeneralEntity> = getGeneralUseCase().asLiveData()
 

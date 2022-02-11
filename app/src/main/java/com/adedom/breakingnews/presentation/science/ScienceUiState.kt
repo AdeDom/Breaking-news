@@ -1,6 +1,6 @@
 package com.adedom.breakingnews.presentation.science
 
-data class ScienceViewState(
+data class ScienceUiState(
     val search: String = "",
     val isLoading: Boolean = false,
 )

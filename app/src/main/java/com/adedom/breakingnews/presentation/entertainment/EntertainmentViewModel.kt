@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class EntertainmentViewModel(
     private val getEntertainmentUseCase: GetEntertainmentUseCase,
-) : BaseViewModel<EntertainmentViewState>(EntertainmentViewState()) {
+) : BaseViewModel<EntertainmentUiState>(EntertainmentUiState()) {
 
     val getEntertainment: LiveData<EntertainmentEntity> = getEntertainmentUseCase().asLiveData()
 

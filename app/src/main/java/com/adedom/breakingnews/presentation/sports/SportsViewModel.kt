@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class SportsViewModel(
     private val getSportsUseCase: GetSportsUseCase,
-) : BaseViewModel<SportsViewState>(SportsViewState()) {
+) : BaseViewModel<SportsUiState>(SportsUiState()) {
 
     val getSports: LiveData<SportsEntity> = getSportsUseCase().asLiveData()
 

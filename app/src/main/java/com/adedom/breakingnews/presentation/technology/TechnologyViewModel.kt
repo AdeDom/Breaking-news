@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class TechnologyViewModel(
     private val getTechnologyUseCase: GetTechnologyUseCase,
-) : BaseViewModel<TechnologyViewState>(TechnologyViewState()) {
+) : BaseViewModel<TechnologyUiState>(TechnologyUiState()) {
 
     val getTechnology: LiveData<TechnologyEntity> = getTechnologyUseCase().asLiveData()
 

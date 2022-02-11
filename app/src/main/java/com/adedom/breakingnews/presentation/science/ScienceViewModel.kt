@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class ScienceViewModel(
     private val getScienceUseCase: GetScienceUseCase,
-) : BaseViewModel<ScienceViewState>(ScienceViewState()) {
+) : BaseViewModel<ScienceUiState>(ScienceUiState()) {
 
     val getScience: LiveData<ScienceEntity> = getScienceUseCase().asLiveData()
 

@@ -1,6 +1,6 @@
 package com.adedom.breakingnews.presentation.sports
 
-data class SportsViewState(
+data class SportsUiState(
     val search: String = "",
     val isLoading: Boolean = false,
 )

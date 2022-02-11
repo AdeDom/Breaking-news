@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class BusinessViewModel(
     private val getBusinessUseCase: GetBusinessUseCase,
-) : BaseViewModel<BusinessViewState>(BusinessViewState()) {
+) : BaseViewModel<BusinessUiState>(BusinessUiState()) {
 
     val getBusiness: LiveData<BusinessEntity> = getBusinessUseCase().asLiveData()
 
