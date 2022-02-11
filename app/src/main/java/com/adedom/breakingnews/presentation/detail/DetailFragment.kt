@@ -33,7 +33,6 @@ class DetailFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setUpView()
-        viewEvent()
     }
 
     private fun setUpView() {
@@ -51,7 +50,7 @@ class DetailFragment : BaseFragment() {
         args.detail.urlToImage?.let { binding.ivImage.load(args.detail.urlToImage) }
     }
 
-    private fun viewEvent() {
+    override fun setupEvent() {
         binding.tvUrl.setOnClickListener {
             Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse(args.detail.url)

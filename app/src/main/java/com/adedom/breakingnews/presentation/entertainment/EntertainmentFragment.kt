@@ -39,15 +39,7 @@ class EntertainmentFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        setUpView()
-        observeViewModel()
-        viewEvent()
-    }
-
-    private fun setUpView() {
+    override fun setupAdapter() {
         binding.recyclerView.apply {
             val llm = LinearLayoutManager(context)
             layoutManager = llm
@@ -63,7 +55,7 @@ class EntertainmentFragment : BaseFragment() {
         }
     }
 
-    private fun observeViewModel() {
+    override fun setupViewModel() {
         viewModel.uiState.observe { state ->
             binding.animationView.isVisible = state.isLoading
         }
@@ -78,7 +70,7 @@ class EntertainmentFragment : BaseFragment() {
         viewModel.error.observeError()
     }
 
-    private fun viewEvent() {
+    override fun setupEvent() {
         mAdapter.setOnClickListener {
             activity?.hideSoftKeyboard()
             binding.swipeRefreshLayout.isRefreshing = false

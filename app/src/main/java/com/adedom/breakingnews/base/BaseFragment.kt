@@ -11,6 +11,19 @@ import kotlinx.coroutines.flow.StateFlow
 
 abstract class BaseFragment : Fragment() {
 
+    open fun setupViewModel() {}
+
+    open fun setupAdapter() {}
+
+    open fun setupEvent() {}
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupViewModel()
+        setupAdapter()
+        setupEvent()
+    }
+
     protected inline fun <reified T> LiveData<T>.observe(crossinline onNext: (T) -> Unit) {
         observe(this@BaseFragment) { onNext(it) }
     }
