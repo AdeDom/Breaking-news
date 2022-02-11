@@ -56,7 +56,7 @@ class TechnologyViewModel(
         launch {
             setState { copy(isLoading = true) }
 
-            val search = state.value?.search ?: return@launch
+            val search = uiState.value.search
             when (val resource = getTechnologyUseCase.callCategoryTechnologySearch(query = search)) {
                 is Resource.Success -> {
                 }

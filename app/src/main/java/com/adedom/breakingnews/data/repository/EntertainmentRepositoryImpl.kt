@@ -15,7 +15,7 @@ class EntertainmentRepositoryImpl(
 ) : BaseRepository(), EntertainmentRepository {
 
     override suspend fun callCategoryEntertainment(): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
+        val resource = callApi {
             breakingNewsDataSource.callBreakingNews(CategoryConstant.ENTERTAINMENT, getCountry())
         }
         if (resource is Resource.Success) {
@@ -33,8 +33,12 @@ class EntertainmentRepositoryImpl(
     }
 
     override suspend fun callCategoryEntertainmentNextPage(page: Int): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
-            breakingNewsDataSource.callBreakingNews(CategoryConstant.ENTERTAINMENT, getCountry(), page = page)
+        val resource = callApi {
+            breakingNewsDataSource.callBreakingNews(
+                CategoryConstant.ENTERTAINMENT,
+                getCountry(),
+                page = page
+            )
         }
         if (resource is Resource.Success) {
             val generalEntity = mapBreakingNewsResponseToEntertainmentEntity(resource.data)
@@ -44,8 +48,12 @@ class EntertainmentRepositoryImpl(
     }
 
     override suspend fun callCategoryEntertainmentSearch(query: String): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
-            breakingNewsDataSource.callBreakingNews(CategoryConstant.ENTERTAINMENT, getCountry(), query = query)
+        val resource = callApi {
+            breakingNewsDataSource.callBreakingNews(
+                CategoryConstant.ENTERTAINMENT,
+                getCountry(),
+                query = query
+            )
         }
         if (resource is Resource.Success) {
             entertainmentDataSource.deleteEntertainment()

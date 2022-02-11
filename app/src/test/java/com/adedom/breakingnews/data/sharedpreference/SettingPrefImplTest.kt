@@ -21,7 +21,11 @@ class SettingPrefImplTest {
     @Before
     fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
-        settingPref = SettingPrefImpl(context)
+        val sharedPreferences = context.getSharedPreferences(
+            SettingPrefImpl.SETTING_PREF,
+            Context.MODE_PRIVATE
+        )
+        settingPref = SettingPrefImpl(sharedPreferences)
     }
 
     @After

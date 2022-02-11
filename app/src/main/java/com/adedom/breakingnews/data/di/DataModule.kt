@@ -1,5 +1,7 @@
 package com.adedom.breakingnews.data.di
 
+import android.content.Context
+import android.content.SharedPreferences
 import com.adedom.breakingnews.data.db.AppDatabase
 import com.adedom.breakingnews.data.network.source.*
 import com.adedom.breakingnews.data.repository.*
@@ -30,6 +32,9 @@ val dataModule = module {
     single<SportsRepository> { SportsRepositoryImpl(get(), get(), get()) }
     single<TechnologyRepository> { TechnologyRepositoryImpl(get(), get(), get()) }
 
+    single<SharedPreferences> {
+        get<Context>().getSharedPreferences(SettingPrefImpl.SETTING_PREF, Context.MODE_PRIVATE)
+    }
     single<SettingPref> { SettingPrefImpl(get()) }
 
 }

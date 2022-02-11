@@ -15,7 +15,7 @@ class HealthRepositoryImpl(
 ) : BaseRepository(), HealthRepository {
 
     override suspend fun callCategoryHealth(): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
+        val resource = callApi {
             breakingNewsDataSource.callBreakingNews(CategoryConstant.HEALTH, getCountry())
         }
         if (resource is Resource.Success) {
@@ -33,8 +33,12 @@ class HealthRepositoryImpl(
     }
 
     override suspend fun callCategoryHealthNextPage(page: Int): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
-            breakingNewsDataSource.callBreakingNews(CategoryConstant.HEALTH, getCountry(), page = page)
+        val resource = callApi {
+            breakingNewsDataSource.callBreakingNews(
+                CategoryConstant.HEALTH,
+                getCountry(),
+                page = page
+            )
         }
         if (resource is Resource.Success) {
             val generalEntity = mapBreakingNewsResponseToHealthEntity(resource.data)
@@ -44,8 +48,12 @@ class HealthRepositoryImpl(
     }
 
     override suspend fun callCategoryHealthSearch(query: String): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
-            breakingNewsDataSource.callBreakingNews(CategoryConstant.HEALTH, getCountry(), query = query)
+        val resource = callApi {
+            breakingNewsDataSource.callBreakingNews(
+                CategoryConstant.HEALTH,
+                getCountry(),
+                query = query
+            )
         }
         if (resource is Resource.Success) {
             healthDataSource.deleteHealth()

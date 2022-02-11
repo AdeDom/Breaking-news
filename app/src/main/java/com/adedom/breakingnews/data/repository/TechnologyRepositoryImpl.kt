@@ -15,7 +15,7 @@ class TechnologyRepositoryImpl(
 ) : BaseRepository(), TechnologyRepository {
 
     override suspend fun callCategoryTechnology(): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
+        val resource = callApi {
             breakingNewsDataSource.callBreakingNews(CategoryConstant.TECHNOLOGY, getCountry())
         }
         if (resource is Resource.Success) {
@@ -33,8 +33,12 @@ class TechnologyRepositoryImpl(
     }
 
     override suspend fun callCategoryTechnologyNextPage(page: Int): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
-            breakingNewsDataSource.callBreakingNews(CategoryConstant.TECHNOLOGY, getCountry(), page = page)
+        val resource = callApi {
+            breakingNewsDataSource.callBreakingNews(
+                CategoryConstant.TECHNOLOGY,
+                getCountry(),
+                page = page
+            )
         }
         if (resource is Resource.Success) {
             val generalEntity = mapBreakingNewsResponseToTechnologyEntity(resource.data)
@@ -44,8 +48,12 @@ class TechnologyRepositoryImpl(
     }
 
     override suspend fun callCategoryTechnologySearch(query: String): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
-            breakingNewsDataSource.callBreakingNews(CategoryConstant.TECHNOLOGY, getCountry(), query = query)
+        val resource = callApi {
+            breakingNewsDataSource.callBreakingNews(
+                CategoryConstant.TECHNOLOGY,
+                getCountry(),
+                query = query
+            )
         }
         if (resource is Resource.Success) {
             technologyDataSource.deleteTechnology()

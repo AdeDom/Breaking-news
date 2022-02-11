@@ -15,7 +15,7 @@ class SportsRepositoryImpl(
 ) : BaseRepository(), SportsRepository {
 
     override suspend fun callCategorySports(): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
+        val resource = callApi {
             breakingNewsDataSource.callBreakingNews(CategoryConstant.SPORTS, getCountry())
         }
         if (resource is Resource.Success) {
@@ -33,8 +33,12 @@ class SportsRepositoryImpl(
     }
 
     override suspend fun callCategorySportsNextPage(page: Int): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
-            breakingNewsDataSource.callBreakingNews(CategoryConstant.SPORTS, getCountry(), page = page)
+        val resource = callApi {
+            breakingNewsDataSource.callBreakingNews(
+                CategoryConstant.SPORTS,
+                getCountry(),
+                page = page
+            )
         }
         if (resource is Resource.Success) {
             val generalEntity = mapBreakingNewsResponseToSportsEntity(resource.data)
@@ -44,8 +48,12 @@ class SportsRepositoryImpl(
     }
 
     override suspend fun callCategorySportsSearch(query: String): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
-            breakingNewsDataSource.callBreakingNews(CategoryConstant.SPORTS, getCountry(), query = query)
+        val resource = callApi {
+            breakingNewsDataSource.callBreakingNews(
+                CategoryConstant.SPORTS,
+                getCountry(),
+                query = query
+            )
         }
         if (resource is Resource.Success) {
             sportsDataSource.deleteSports()

@@ -56,7 +56,7 @@ class BusinessViewModel(
         launch {
             setState { copy(isLoading = true) }
 
-            val search = state.value?.search ?: return@launch
+            val search = uiState.value.search
             when (val resource = getBusinessUseCase.callCategoryBusinessSearch(query = search)) {
                 is Resource.Success -> {
                 }

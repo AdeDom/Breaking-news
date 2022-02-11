@@ -67,7 +67,7 @@ class GeneralViewModelTest {
 
         viewModel.setStateSearch(messageSearch)
 
-        val search = viewModel.state.getOrAwaitValue().search
+        val search = viewModel.uiState.getOrAwaitValue().search
         assertThat(search).isEqualTo(messageSearch)
     }
 
@@ -81,7 +81,7 @@ class GeneralViewModelTest {
         viewModel.setStateSearch(messageSearch)
         viewModel.callCategoryGeneralSearch()
 
-        val search = viewModel.state.getOrAwaitValue().search
+        val search = viewModel.uiState.getOrAwaitValue().search
         val error = viewModel.error.getOrAwaitValue()
         assertThat(search).isEqualTo(messageSearch)
         assertThat(error).isEqualTo(throwable)

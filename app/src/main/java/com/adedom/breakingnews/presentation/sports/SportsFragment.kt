@@ -64,7 +64,7 @@ class SportsFragment : BaseFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.state.observe { state ->
+        viewModel.uiState.observe { state ->
             binding.animationView.isVisible = state.isLoading
         }
 

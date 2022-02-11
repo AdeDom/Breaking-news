@@ -15,7 +15,7 @@ class BusinessRepositoryImpl(
 ) : BaseRepository(), BusinessRepository {
 
     override suspend fun callCategoryBusiness(): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
+        val resource = callApi {
             breakingNewsDataSource.callBreakingNews(CategoryConstant.BUSINESS, getCountry())
         }
         if (resource is Resource.Success) {
@@ -33,8 +33,12 @@ class BusinessRepositoryImpl(
     }
 
     override suspend fun callCategoryBusinessNextPage(page: Int): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
-            breakingNewsDataSource.callBreakingNews(CategoryConstant.BUSINESS, getCountry(), page = page)
+        val resource = callApi {
+            breakingNewsDataSource.callBreakingNews(
+                CategoryConstant.BUSINESS,
+                getCountry(),
+                page = page
+            )
         }
         if (resource is Resource.Success) {
             val generalEntity = mapBreakingNewsResponseToBusinessEntity(resource.data)
@@ -44,8 +48,12 @@ class BusinessRepositoryImpl(
     }
 
     override suspend fun callCategoryBusinessSearch(query: String): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
-            breakingNewsDataSource.callBreakingNews(CategoryConstant.BUSINESS, getCountry(), query = query)
+        val resource = callApi {
+            breakingNewsDataSource.callBreakingNews(
+                CategoryConstant.BUSINESS,
+                getCountry(),
+                query = query
+            )
         }
         if (resource is Resource.Success) {
             businessDataSource.deleteBusiness()

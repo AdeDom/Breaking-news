@@ -56,7 +56,7 @@ class SportsViewModel(
         launch {
             setState { copy(isLoading = true) }
 
-            val search = state.value?.search ?: return@launch
+            val search = uiState.value.search
             when (val resource = getSportsUseCase.callCategorySportsSearch(query = search)) {
                 is Resource.Success -> {
                 }

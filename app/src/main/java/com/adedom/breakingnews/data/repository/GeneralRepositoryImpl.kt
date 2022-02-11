@@ -15,7 +15,7 @@ class GeneralRepositoryImpl(
 ) : BaseRepository(), GeneralRepository {
 
     override suspend fun callCategoryGeneral(): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
+        val resource = callApi {
             breakingNewsDataSource.callBreakingNews(CategoryConstant.GENERAL, getCountry())
         }
         if (resource is Resource.Success) {
@@ -33,8 +33,12 @@ class GeneralRepositoryImpl(
     }
 
     override suspend fun callCategoryGeneralNextPage(page: Int): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
-            breakingNewsDataSource.callBreakingNews(CategoryConstant.GENERAL, getCountry(), page = page)
+        val resource = callApi {
+            breakingNewsDataSource.callBreakingNews(
+                CategoryConstant.GENERAL,
+                getCountry(),
+                page = page
+            )
         }
         if (resource is Resource.Success) {
             val generalEntity = mapBreakingNewsResponseToGeneralEntity(resource.data)
@@ -44,8 +48,12 @@ class GeneralRepositoryImpl(
     }
 
     override suspend fun callCategoryGeneralSearch(query: String): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
-            breakingNewsDataSource.callBreakingNews(CategoryConstant.GENERAL, getCountry(), query = query)
+        val resource = callApi {
+            breakingNewsDataSource.callBreakingNews(
+                CategoryConstant.GENERAL,
+                getCountry(),
+                query = query
+            )
         }
         if (resource is Resource.Success) {
             generalDataSource.deleteGeneral()

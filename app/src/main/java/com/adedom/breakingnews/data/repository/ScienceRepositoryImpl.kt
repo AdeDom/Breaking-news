@@ -15,7 +15,7 @@ class ScienceRepositoryImpl(
 ) : BaseRepository(), ScienceRepository {
 
     override suspend fun callCategoryScience(): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
+        val resource = callApi {
             breakingNewsDataSource.callBreakingNews(CategoryConstant.SCIENCE, getCountry())
         }
         if (resource is Resource.Success) {
@@ -33,8 +33,12 @@ class ScienceRepositoryImpl(
     }
 
     override suspend fun callCategoryScienceNextPage(page: Int): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
-            breakingNewsDataSource.callBreakingNews(CategoryConstant.SCIENCE, getCountry(), page = page)
+        val resource = callApi {
+            breakingNewsDataSource.callBreakingNews(
+                CategoryConstant.SCIENCE,
+                getCountry(),
+                page = page
+            )
         }
         if (resource is Resource.Success) {
             val generalEntity = mapBreakingNewsResponseToScienceEntity(resource.data)
@@ -44,8 +48,12 @@ class ScienceRepositoryImpl(
     }
 
     override suspend fun callCategoryScienceSearch(query: String): Resource<BreakingNewsResponse> {
-        val resource = safeApiCall {
-            breakingNewsDataSource.callBreakingNews(CategoryConstant.SCIENCE, getCountry(), query = query)
+        val resource = callApi {
+            breakingNewsDataSource.callBreakingNews(
+                CategoryConstant.SCIENCE,
+                getCountry(),
+                query = query
+            )
         }
         if (resource is Resource.Success) {
             scienceDataSource.deleteScience()

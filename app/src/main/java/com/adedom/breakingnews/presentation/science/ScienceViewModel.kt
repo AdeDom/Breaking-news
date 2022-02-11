@@ -56,7 +56,7 @@ class ScienceViewModel(
         launch {
             setState { copy(isLoading = true) }
 
-            val search = state.value?.search ?: return@launch
+            val search = uiState.value.search
             when (val resource = getScienceUseCase.callCategoryScienceSearch(query = search)) {
                 is Resource.Success -> {
                 }
